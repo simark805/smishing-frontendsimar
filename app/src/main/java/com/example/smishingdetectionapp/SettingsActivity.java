@@ -45,7 +45,7 @@ import com.google.android.material.button.MaterialButton;
 public class SettingsActivity extends AppCompatActivity {
     private SeekBar seekBarFontScale;
     private TextView preview;
-    private static final int TIMEOUT_MILLIS = 10000; // 30 seconds timeout
+    private static final int TIMEOUT_MILLIS = 30000; // 30 seconds timeout
     private boolean isAuthenticated = false;
     private BiometricPrompt biometricPrompt; // To cancel authentication
     private Button buttonIncreaseTextSize, buttonDecreaseTextSize, dialogCancel, dialogSignout;
