@@ -634,6 +634,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="4dp"
+                android:contentDescription="@string/help_svg_alt"
                 app:layout_constraintEnd_toEndOf="@+id/helpBtn"
                 app:layout_constraintTop_toTopOf="@+id/helpBtn"
                 app:srcCompat="@drawable/help_svg" />
