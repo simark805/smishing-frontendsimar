@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -41,6 +42,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.util.HashMap;
+import com.example.smishingdetectionapp.ui.login.ForgotPasswordActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -89,7 +91,8 @@ public class LoginActivity extends AppCompatActivity {
         final SignInButton googleBtn = binding.googleBtn;
         final Button registerButton = binding.registerButton;
         final ImageButton togglePasswordVisibility = binding.togglePasswordVisibility;
-        final Button togglePinLogin = (Button) binding.togglePinLogin;  // Added missing reference for togglePinLogin button
+        final Button togglePinLogin = binding.togglePinLogin;
+        final TextView forgotPasswordButton = binding.forgotPasswordButton;
 
         // Toggle functionality for PIN and Password login
         togglePinLogin.setOnClickListener(v -> {
@@ -129,6 +132,12 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 loginWithPassword(email, input);
             }
+        });
+
+        // Handle forgot password click
+        forgotPasswordButton.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+            startActivity(intent);
         });
 
         // Handle register button click
