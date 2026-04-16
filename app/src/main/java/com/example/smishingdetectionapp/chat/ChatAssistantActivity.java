@@ -215,41 +215,58 @@ public class ChatAssistantActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
         sendButton.setEnabled(false);
 
-        String lowerMsg = message.toLowerCase();
+        // changes made below to normalise input
+        String lowerMsg = message
+                .toLowerCase()
+                .trim()
+                .replaceAll("[^a-zA-Z0-9\\s]", "");
 
-        // Step 1: FAQ / quick-support match
-        for (String key : supportPrompts.keySet()) {
-            if (lowerMsg.contains(key)) {
-                String botReply = supportPrompts.get(key);
-                supportPromptCount++;
+// Step 1: exact FAQ match - changed contain() to get() for accuracy
+        String botReply = supportPrompts.get(lowerMsg);
 
-                runOnUiThread(() -> {
-                    respondToUser(botReply);
+// Step 2: partial match fallback
+        botReply = supportPrompts.get(lowerMsg);
 
-                    if ("is this a scam".equals(key)) {
-                        new Handler(Looper.getMainLooper())
-                                .postDelayed(() ->
-                                                respondToUser("Yes, this appears to be a scam. Please avoid engaging with it."),
-                                        2000);
-                    }
-
-                    if (supportPromptCount >= MAX_SUPPORT_PROMPTS) {
-                        new Handler(Looper.getMainLooper()).postDelayed(() -> {
-                            respondToUser("Transferring you to the assistant for more detailed help…");
-                            Log.d("ChatFlow", "Escalating to Ollama after quick-support threshold. Prompt: " + message);
-                            Toast.makeText(ChatAssistantActivity.this, "Sending to assistant…", Toast.LENGTH_SHORT).show();
-
-                            callLlm(message);
-                        }, 1200);
-                    } else {
-                        resetUiIdle();
-                    }
-                });
-
-                return;
+// Step 2: partial match - contains()
+        if (botReply == null) {
+            for (String key : supportPrompts.keySet()) {
+                if (lowerMsg.contains(key)) {
+                    botReply = supportPrompts.get(key);
+                    break;
+                }
             }
         }
 
+        if (botReply != null) {
+            supportPromptCount++;
+
+            final String finalReply = botReply;
+
+            runOnUiThread(() -> {
+                respondToUser(finalReply);
+
+                if ("is this a scam".equals(lowerMsg)) {
+                    new Handler(Looper.getMainLooper())
+                            .postDelayed(() ->
+                                            respondToUser("Yes, this appears to be a scam. Please avoid engaging with it."),
+                                    2000);
+                }
+
+                if (supportPromptCount >= MAX_SUPPORT_PROMPTS) {
+                    new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                        respondToUser("Transferring you to the assistant for more detailed help…");
+                        callLlm(message);
+                    }, 1200);
+                } else {
+                    resetUiIdle();
+                }
+            });
+
+            return;
+        }
+
+        // fallback if STILL no match
+        callLlm(message);
         // Step 2: no FAQ match → call LLM
         callLlm(message);
     }
