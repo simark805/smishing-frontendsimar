@@ -36,6 +36,7 @@ import com.example.smishingdetectionapp.navigation.BottomNavCoordinator;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.List;
+import android.util.TypedValue;
 
 public class RiskResultActivity extends AppCompatActivity {
 
@@ -174,7 +175,12 @@ public class RiskResultActivity extends AppCompatActivity {
         // adding styling to detected issues and the text for it
         SpannableString riskHeader = new SpannableString(header);
         riskHeader.setSpan(new StyleSpan(Typeface.BOLD), 0, riskHeader.length(), 0);
-        riskHeader.setSpan(new ForegroundColorSpan(android.graphics.Color.parseColor("#4B74F0")), 0, riskHeader.length(), 0);
+
+        TypedValue tv = new TypedValue();
+        getTheme().resolveAttribute(com.google.android.material.R.attr.colorPrimary, tv, true);
+        int primaryColor = tv.data;
+
+        riskHeader.setSpan(new ForegroundColorSpan(primaryColor), 0, riskHeader.length(), 0);
         riskHeader.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER), 0, riskHeader.length(), 0);
         message.append(riskHeader);
 
