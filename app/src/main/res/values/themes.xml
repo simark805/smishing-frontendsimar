@@ -14,7 +14,12 @@
         <!-- Customize your theme here. -->
     </style>
 
-   <style name="Theme.SmishingDetectionApp.NoActionBar">
+    <style name="Theme.SmishingDetectionApp" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/navy_blue</item>
+        <item name="colorSecondary">@color/baby_blue</item>
+    </style>
+
+    <style name="Theme.SmishingDetectionApp.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
@@ -29,21 +34,16 @@
          <!-- Customize your light theme here. -->
         <item name="colorPrimary">@color/baby_blue</item>
     </style>
-
-    <style name="AlertDialogCustom" parent="Theme.MaterialComponents.Light.Dialog.Alert">
-        <!-- This is the Dialog Theme -->
-        <item name="android:textColor">@color/navy_blue</item>
-        <item name="colorAccent">@color/navy_blue</item> <!-- Color for the dialog buttons and other accents -->
-        <item name="android:buttonBarPositiveButtonStyle">@style/AlertDialogButtonStyle</item>
-        <item name="android:buttonBarNegativeButtonStyle">@style/AlertDialogButtonStyle</item>
+    <!--Text styling-->
+    <style name="Theme.SmishingDetectionApp.Bold">
+    <item name="android:textViewStyle">@style/BoldTextViewStyle</item>
+    <item name="textAppearanceBodyLarge">@style/BoldTextAppearance</item>
+    <item name="textAppearanceBodyMedium">@style/BoldTextAppearance</item>
+    <item name="textAppearanceBodySmall">@style/BoldTextAppearance</item>
+    <item name="android:buttonStyle">@style/BoldButtonStyle</item>
+    <item name="buttonStyle">@style/BoldMaterialButtonStyle</item>
+    <item name="materialSwitchStyle">@style/BoldMaterialSwitch</item>
     </style>
-
-    <style name="AlertDialogButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
-        <item name="android:textColor">@color/black</item> <!-- Set to your desired button text color -->
-    </style>
-
-
-
 
 
 </resources>

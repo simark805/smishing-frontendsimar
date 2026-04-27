@@ -1,3 +1,6 @@
+rootProject.name = "SmishingDetectionApp"
+
+
 pluginManagement {
     repositories {
         google {
@@ -11,14 +14,22 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
-        google()
+        google {
+            mavenContent {
+                includeGroupAndSubgroups("androidx")
+                includeGroupAndSubgroups("com.android")
+                includeGroupAndSubgroups("com.google")
+            }
+        }
         mavenCentral()
+        maven(url = "https://jitpack.io") // ✅ Needed for MPAndroidChart and other GitHub libraries
     }
 }
 
-rootProject.name = "SmishingDetectionApp"
+
 include(":app")
- 
+include(":shared")

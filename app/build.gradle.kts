@@ -1,7 +1,29 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import java.util.Properties
+
+val localProperties = Properties().apply {
+    val localPropertiesFile = rootProject.file("local.properties")
+    if (localPropertiesFile.exists()) {
+        localPropertiesFile.inputStream().use(::load)
+    }
+}
+
+fun configValue(name: String, defaultValue: String = ""): String {
+    val envValue = System.getenv(name)
+    val localValue = localProperties.getProperty(name)
+    return when {
+        !envValue.isNullOrBlank() -> envValue
+        !localValue.isNullOrBlank() -> localValue
+        else -> defaultValue
+    }
+}
+
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
-    id("com.chaquo.python")
+
+    id("org.jetbrains.kotlin.plugin.compose") version libs.versions.kotlin.get()
+    //id("com.chaquo.python")
 }
 
 android {
@@ -26,9 +48,9 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField("String", "EMAIL", "\"smsphishing8@gmail.com\"")
-        buildConfigField("String", "EMAILPASSWORD", "\"xedr gaek jdsv ujxw\"")
-        buildConfigField("String", "SERVERIP", "\"http:192.168.?.?:3000\"")
+        buildConfigField("String", "EMAIL", "\"${configValue("EMAIL")}\"")
+        buildConfigField("String", "EMAILPASSWORD", "\"${configValue("EMAILPASSWORD")}\"")
+        buildConfigField("String", "SERVERIP", "\"${configValue("SERVERIP", "https://example.invalid/")}\"")
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -37,10 +59,18 @@ android {
 
 
 
-   }
+    }
 
     buildTypes {
+        debug {
+            buildConfigField("String", "DEBUG_LOGIN_EMAIL", "\"${configValue("DEBUG_LOGIN_EMAIL", "debug@example.com")}\"")
+            buildConfigField("String", "DEBUG_LOGIN_PASSWORD", "\"${configValue("DEBUG_LOGIN_PASSWORD", "DebugPass123!")}\"")
+            buildConfigField("String", "DEBUG_LOGIN_PIN", "\"${configValue("DEBUG_LOGIN_PIN", "000000")}\"")
+        }
         release {
+            buildConfigField("String", "DEBUG_LOGIN_EMAIL", "\"\"")
+            buildConfigField("String", "DEBUG_LOGIN_PASSWORD", "\"\"")
+            buildConfigField("String", "DEBUG_LOGIN_PIN", "\"\"")
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
@@ -50,8 +80,9 @@ android {
 //    }
     compileOptions {
 
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
+
 
 
     }
@@ -59,12 +90,17 @@ android {
         viewBinding = true
         compose = true
     }
-    kotlinOptions {
-        jvmTarget = "1.8"
+
+    kotlin {
+        compilerOptions {
+            jvmTarget = JvmTarget.fromTarget("21")
+
+        }
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
-    }
+
+    //composeOptions {
+    //    kotlinCompilerExtensionVersion = "1.5.1"
+    //}
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -77,6 +113,15 @@ android {
 }
 
 dependencies {
+
+    implementation(project(":shared"))
+    implementation("com.russhwolf:multiplatform-settings:1.1.1")
+    implementation("io.insert-koin:koin-core:3.5.6")
+    implementation("io.insert-koin:koin-android:3.5.6")
+
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)
@@ -116,6 +161,21 @@ dependencies {
     implementation("io.noties.markwon:html:4.6.2")
     implementation("io.noties.markwon:image:4.6.2")
     implementation("com.google.android.gms:play-services-auth:20.0.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation ("com.tbuonomo:dotsindicator:4.3")
+    implementation("com.airbnb.android:lottie:6.1.0")
+    implementation ("com.google.code.gson:gson:2.10.1")
+    implementation("com.itextpdf:itextg:5.5.10")
+    implementation ("androidx.cardview:cardview:1.0.0")
+    implementation ("com.google.android.material:material:1.10.0")
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("androidx.core:core-ktx:1.10.0")
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+    implementation("com.getkeepsafe.taptargetview:taptargetview:1.13.3")
+    implementation("androidx.room:room-runtime:2.6.1")
+    annotationProcessor("androidx.room:room-compiler:2.6.1")
+
+
+
 
 }
-

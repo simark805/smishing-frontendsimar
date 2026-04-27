@@ -7,256 +7,266 @@
     android:layout_height="match_parent"
     tools:context=".HelpActivity">
 
-    <ScrollView
+    <!-- Top Row -->
+    <LinearLayout
+        android:id="@+id/help_title"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingVertical="16dp"
+        android:paddingHorizontal="16dp"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <!-- Back Button -->
+        <ImageButton
+            android:id="@+id/help_back"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@null"
+            android:contentDescription="Back"
+            app:srcCompat="@drawable/back_button" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/help_page_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/help_page"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/navy_blue"
+            android:gravity="center" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <!-- Menu Button -->
+        <ImageButton
+            android:id="@+id/help_menu"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@null"
+            android:contentDescription="Menu"
+            app:srcCompat="@drawable/menu_icon" />
+    </LinearLayout>
+
+    <!-- Scrollable Content -->
+    <ScrollView
+        android:id="@+id/scroll_help"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/help_title"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:id="@+id/llHelpContent"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <ImageButton
-                android:id="@+id/report_back"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:background="@null"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/back_button" />
-
-
+            <!-- Logo -->
             <ImageView
-                android:id="@+id/HardhatLogo"
+                android:id="@+id/ivHelpIcon"
                 android:layout_width="112dp"
                 android:layout_height="106dp"
-                android:layout_marginTop="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/hardhat_logo" />
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                app:srcCompat="@drawable/new_logo"
+                android:contentDescription="@string/hardhat_logo_alt" />
 
+            <!-- Subtitle -->
             <TextView
-                android:id="@+id/ReportText"
+                android:id="@+id/help_subtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:text="How can we help you? Browse common topics below or get in touch with us."
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+
+            <!-- Common Topics -->
+            <TextView
+                android:id="@+id/help_common_topics_label"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Common Topics"
+                android:textStyle="bold"
+                android:textSize="18sp" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardTopic1"
+                style="@style/Widget.MaterialComponents.CardView"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@string/help_page"
-                android:textColor="@color/navy_blue"
-                android:textSize="32sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.496"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/HardhatLogo" />
-
-            <RelativeLayout
-                android:id="@+id/rv_2"
-                android:layout_width="0dp"
-                android:layout_height="110dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="24dp"
-                android:background="@drawable/counter_buttons"
-                app:layout_constraintEnd_toStartOf="@+id/guideline"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ReportText">
-
-                <ImageView
-                    android:id="@+id/iv_phone"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_centerInParent="true"
-                    android:background="@drawable/circle_background"
-                    android:padding="10dp"
-                    android:src="@drawable/phone_icon" />
-
-                <TextView
-                    android:id="@+id/new_detections"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/iv_phone"
-                    android:layout_alignTop="@id/iv_phone"
-                    android:layout_alignBottom="@id/rv_2"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginTop="30dp"
-                    android:gravity="center"
-                    android:padding="10dp"
-                    android:text="Call Us"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    tools:ignore="NotSibling" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rv_1"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:background="@drawable/counter_buttons"
-                app:layout_constraintBottom_toBottomOf="@+id/rv_2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/guideline"
-                app:layout_constraintTop_toTopOf="@+id/rv_2">
-
-                <ImageView
-                    android:id="@+id/iv_email"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_centerInParent="true"
-                    android:background="@drawable/circle_background"
-                    android:padding="10dp"
-                    android:src="@drawable/email_icon" />
+                android:clickable="true"
+                android:focusable="true">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/iv_email"
-                    android:layout_alignTop="@id/iv_email"
-                    android:layout_alignBottom="@id/rv_2"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginTop="30dp"
-                    android:gravity="center"
-                    android:padding="10dp"
-                    android:text="Mail Us"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    tools:ignore="NotSibling" />
+                    android:padding="16dp"
+                    android:text="How to detect a smishing message"
+                    android:textSize="16sp" />
+            </com.google.android.material.card.MaterialCardView>
 
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rv_3"
-                android:layout_width="0dp"
-                android:layout_height="110dp"
-                android:layout_marginTop="24dp"
-                android:background="@drawable/counter_buttons"
-                app:layout_constraintEnd_toEndOf="@+id/rv_1"
-                app:layout_constraintStart_toStartOf="@+id/rv_2"
-                app:layout_constraintTop_toBottomOf="@+id/rv_2">
-
-                <ImageView
-                    android:id="@+id/iv_faq"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_centerInParent="true"
-                    android:background="@drawable/circle_background"
-                    android:padding="10dp"
-                    android:src="@drawable/faq_icon" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/iv_faq"
-                    android:layout_alignTop="@id/iv_faq"
-                    android:layout_alignBottom="@id/rv_2"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginTop="30dp"
-                    android:gravity="center"
-                    android:padding="10dp"
-                    android:text="FAQ"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    tools:ignore="NotSibling" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rv_4"
-                android:layout_width="0dp"
-                android:layout_height="110dp"
-                android:layout_marginTop="24dp"
-                android:background="@drawable/counter_buttons"
-                app:layout_constraintEnd_toEndOf="@+id/rv_3"
-                app:layout_constraintStart_toStartOf="@+id/rv_3"
-                app:layout_constraintTop_toBottomOf="@+id/rv_3">
-
-                <ImageView
-                    android:id="@+id/iv_feedback"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_centerInParent="true"
-                    android:background="@drawable/circle_background"
-                    android:padding="10dp"
-                    android:src="@drawable/feedback_icon" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/iv_feedback"
-                    android:layout_alignTop="@id/iv_feedback"
-                    android:layout_alignBottom="@id/rv_2"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginTop="30dp"
-                    android:gravity="center"
-                    android:padding="10dp"
-                    android:text="Feedback"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    tools:ignore="NotSibling" />
-
-            </RelativeLayout>
-
-            <TextView
-                android:id="@+id/box1"
-                android:layout_width="0dp"
-                android:layout_height="210dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/buttons_rounded"
-                android:gravity="top|start"
-                android:text="@string/what_is_the_app_for"
-                android:textAlignment="center"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ReportText"
-                tools:ignore="RtlCompat" />
-
-            <TextView
-                android:id="@+id/box2"
-                android:layout_width="0dp"
-                android:layout_height="210dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/buttons_rounded"
-                android:gravity="top|start"
-                android:text="How to use the app?"
-                android:textAlignment="center"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/box1"
-                tools:ignore="HardcodedText,RtlCompat" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline"
-                android:layout_width="0dp"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardTopic2"
+                style="@style/Widget.MaterialComponents.CardView"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.50121653" />
+                android:layout_marginTop="8dp"
+                android:clickable="true"
+                android:focusable="true">
 
-            <Button
-                android:id="@+id/button"
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:text="How to report a suspicious SMS"
+                    android:textSize="16sp" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardTopic3"
+                style="@style/Widget.MaterialComponents.CardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:text="What is smishing vs. phishing?"
+                    android:textSize="16sp" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- FAQ -->
+            <TextView
+                android:id="@+id/help_faq_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Button"
-                tools:layout_editor_absoluteX="32dp"
-                tools:layout_editor_absoluteY="87dp" />
+                android:layout_marginTop="24dp"
+                android:text="FAQ"
+                android:textStyle="bold"
+                android:textSize="18sp" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardFAQ"
+                style="@style/Widget.MaterialComponents.CardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:text="Click here to redirect"
+                    android:textSize="16sp" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Still need help -->
+            <TextView
+                android:id="@+id/help_still_need_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Still need help?"
+                android:textStyle="bold"
+                android:textSize="18sp" />
+
+            <!-- Contact -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp"
+                android:weightSum="2">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardCallUs"
+                    style="@style/Widget.MaterialComponents.CardView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:text="Call Us"
+                        android:textSize="16sp" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardMailUs"
+                    style="@style/Widget.MaterialComponents.CardView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:text="Mail Us"
+                        android:textSize="16sp" />
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardFeedback"
+                style="@style/Widget.MaterialComponents.CardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:text="Send Feedback"
+                    android:textSize="16sp" />
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
     </ScrollView>
+
+    <!-- Bottom Navigation -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/baby_blue"
+        app:menu="@menu/activity_main_drawer"
+        app:itemIconTint="@color/black"
+        app:itemTextColor="@color/black"
+        app:itemIconSize="25dp"
+        app:itemHorizontalTranslationEnabled="false"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,34 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <!-- Existing strings -->
     <string name="back">Back</string>
     <string name="back_button_description">Back</string>
     <string name="continue_button">Continue</string>
     <string name="app_name">Smishing Detection</string>
+    <string name="bot_profile_icon">Bot Profile Icon</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-
+    <string name="no_saved_articles">No saved articles yet.</string>
+    <string name="baseline_keyboard_arrow_right_24">Right Arrow</string>
     <string name="menu_home">Home</string>
-
+    <string name="menu_report">Report</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="toggle_password_visibility">Toggle password visibility</string>
+    <string name="action_welcome_to_screen">Welcome Back</string>
     <string name="action_login_in">Login</string>
     <string name="action_sign_in">Sign In</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="action_sign_up">Register</string>
-    <string name="welcome">"Welcome !"</string>
+    <string name="welcome">"Welcome!"</string>
     <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="invalid_password">Password must be &gt;5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="logo_description">App Logo</string>
-    <string name="chat_assistant_btn">Chat Assistant</string>
-    <string name="chat_assistant_page">Chat Assistant</string>
+    <string name="chat_history">Chat History</string>
+    <string name="clear_chat_history">Clear chat history</string>
+    <!-- Chat Assistant (deduped) -->
+    <string name="history">View chat history</string>
+    <string name="chat_assistant_btn">Get Support</string>
+    <string name="chat_assistant_page">Support Chat</string>
+    <string name="back_button_desc">Back</string>
+    <string name="send_button_desc">Send</string>
+    <string name="support_hint">Type your message...</string>
+    <string name="support_title">AI Support</string>
+    <string name="chat_back_desc">Back</string>
+    <string name="send_message">Send message</string>
+    <string name="chat_input_hint">Type your message...</string>
+    <string name="cd_back">Back</string>
+    <string name="cd_send">Send message</string>
+    <string name="cd_logo">App logo</string>
+    <string name="cd_history">Open chat history</string>
+    <string name="cd_send_button">Send message button</string>
+    <string name="cd_message_input">Editable text field to type your message</string>
+    <string name="chat_welcome_1">Hi! I’m the Smishing Smart Assistant.</string>
+    <string name="chat_welcome_2">I can help explain smishing, check suspicious texts, or show how to report them.</string>
+    <string name="chat_welcome_3">Try: "What is smishing?" or paste a message you want me to check.</string>
+    <string name="export_chat_history">Export chat history</string>
+    <string name="chat_history_exported">Chat history exported successfully.</string>
+    <string name="cd_menu">More options</string>
+    <string name="export_chat_history_txt">Export chat history (TXT)</string>
+    <string name="export_chat_history_pdf">Export chat history (PDF)</string>
+    <string name="smishing_assistant">Smishing Assistant</string>
+    <string name="support_feedback_title">Support Feedback</string>
+    <!-- ================= Feedback Strings ================= -->
+    <string name="feedback_header">Smishing Assistant</string>
+    <string name="select_rating">Select rating</string>
+
+    <!-- Question 1 -->
+    <string name="feedback_q1">Has your issue been solved?</string>
+    <string name="feedback_yes">Yes 🙂</string>
+    <string name="feedback_no">No 🙁</string>
+    <string name="feedback_select_yes_no">Please select Yes or No.</string>
+    <!-- Question 2 -->
+    <string name="feedback_q2">How would you rate our support service?</string>
+    <!-- ================= Additional Feedback Strings ================= -->
+    <string name="feedback_apology">We apologize for any inconvenience. We will work harder to improve our services!</string>
+    <string name="no_specific_issue">No specific issue selected</string>
+    <!-- Problems list -->
+    <string name="experience_problems">Did you experience any of the following problems?</string>
+    <string name="problem_solution_not_helpful">Solution not helpful</string>
+    <string name="problem_robotic_replies">Robotic replies</string>
+    <string name="problem_slow_response">Slow response</string>
+    <string name="problem_wrong_words">Wrong words used</string>
+    <string name="problem_repetitive">Getting repetitive questions</string>
+    <string name="problem_unfriendly">Unfriendly attitude</string>
+
+    <!-- Free text -->
+    <string name="feedback_hint">Please tell us more...</string>
+    <string name="feedback_more">Please provide more details</string>
+    <string name="feedback_counter">0/280</string>
+
+    <!-- Buttons & messages -->
+    <string name="feedback_submit">Submit</string>
+    <string name="thank_you_message">Thank you for your valuable feedback!</string>
+    <string name="close">Close</string>
+    <string name="feedback_submitted">Your feedback has been submitted.</string>
+    <string name="smishing_ai_assistant">Smishing AI Assistant</string>
+    <string name="support_feedback_details_title">Feedback Details</string>
+
+    <!-- Success dialog -->
+    <string name="chat_rated_success">Chat rated successfully</string>
+    <string name="feedback_positive_msg">Thank you for your feedback! Your support motivates us to keep improving.</string>
+    <string name="feedback_neutral_msg">Thanks for sharing your feedback. We’ll continue working to provide a better experience.</string>
+    <string name="feedback_negative_msg">We apologize for any inconvenience. We will work harder to improve our services!</string>
+    <!-- Accessibility content descriptions -->
+    <string name="cd_success">Feedback submitted successfully</string>
+
+    <!-- Thank you / confirmation -->
+    <string name="feedback_thank_you">Thank you for your feedback! Your support is what motivates us to keep improving.</string>
+    <string name="feedback_summary_default">Excellent</string>
+    <string name="rating_poor">Poor 😞</string>
+    <string name="rating_fair">Fair 😐</string>
+    <string name="rating_average">Average 🙂</string>
 
     <!-- Error messages -->
     <string name="no_network_message">No available network. Please check your internet connection or try again later</string>
@@ -48,50 +130,47 @@
     <string name="sms_page">SMS Messages</string>
 
     <!-- Main Dashboard Strings -->
-    <string name="detectionsBtn">Detections</string>
+    <string name="detectionsBtn">View Detections</string>
     <string name="new_detectionsTxt">New detections</string>
     <string name="total_detectionsTxt">Total detections</string>
+    <string name="view_detections">View Detections</string>
+    <string name="risk_scanner">Risk Scanner</string>
 
     <!-- Account Settings Page Buttons -->
-    <string name="password_changeBtn">Password</string>
-    <string name="phone_changeBtn">Phone</string>
-    <string name="email_changeBtn">Email</string>
-    <string name="dark_modeBtn">Dark mode</string>
+    <string name="password_changeBtn">Change Password</string>
+    <string name="phone_changeBtn">Change Phone</string>
+    <string name="email_changeBtn">Change Email</string>
+    <string name="dark_modeBtn">Toggle Dark mode</string>
     <string name="delete_accountBtn">Delete account</string>
     <string name="sign_outBtn">Sign out</string>
-    <string name="session_timeoutBtn">Session Timeout</string>
-    <string name="pin_changeBtn">Pin</string>
+    <string name="session_timeoutBtn">Session Timeout Settings</string>
+    <string name="pin_changeBtn">Change Pin</string>
 
+    <!-- Terms & Privacy (escaped HTML) -->
     <string name="terms_and_conditions">
-    &lt;b&gt;TERMS AND CONDITIONS&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;
+&lt;b&gt;1.&lt;/b&gt; By using this app, you agree to comply with these terms.&lt;br/&gt;
+&lt;b&gt;2.&lt;/b&gt; The app is provided on an as is basis, with no guarantees of accuracy or availability.&lt;br/&gt;
+&lt;b&gt;3.&lt;/b&gt; You are responsible for ensuring you use the services in accordance with applicable laws.&lt;br/&gt;
+&lt;b&gt;4.&lt;/b&gt; Unauthorized reproduction, modification, or distribution of this app or its content is strictly prohibited.&lt;br/&gt;
+&lt;b&gt;5.&lt;/b&gt; We reserve the right to modify or discontinue the app without notice.&lt;br/&gt;
+&lt;b&gt;6.&lt;/b&gt; We respect your privacy and commit to protecting your data as per the privacy policy outlined herein.&lt;br/&gt;
+&lt;b&gt;7.&lt;/b&gt; Your personal data will only be used for purposes that you have explicitly agreed to.&lt;br/&gt;
+&lt;b&gt;8.&lt;/b&gt; Any disputes arising from the use of this app will be subject to the jurisdiction of [Your Location].&lt;br/&gt;&lt;br/&gt;
 
-    &lt;b&gt;1.&lt;/b&gt; By using this app, you agree to comply with these terms.&lt;br/&gt;
-    &lt;b&gt;2.&lt;/b&gt; The app is provided on an as is basis, with no guarantees of accuracy or availability.&lt;br/&gt;
-    &lt;b&gt;3.&lt;/b&gt; You are responsible for ensuring you use the services in accordance with applicable laws.&lt;br/&gt;
-    &lt;b&gt;4.&lt;/b&gt; Unauthorized reproduction, modification, or distribution of this app or its content is strictly prohibited.&lt;br/&gt;
-    &lt;b&gt;5.&lt;/b&gt; We reserve the right to modify or discontinue the app without notice.&lt;br/&gt;
-    &lt;b&gt;6.&lt;/b&gt; We respect your privacy and commit to protecting your data as per the privacy policy outlined herein.&lt;br/&gt;
-    &lt;b&gt;7.&lt;/b&gt; Your personal data will only be used for purposes that you have explicitly agreed to.&lt;br/&gt;
-    &lt;b&gt;8.&lt;/b&gt; Any disputes arising from the use of this app will be subject to the jurisdiction of [Your Location].&lt;br/&gt;&lt;br/&gt;
+&lt;b&gt;PRIVACY POLICY&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;
 
-    &lt;b&gt;PRIVACY POLICY&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;
+&lt;b&gt;1.&lt;/b&gt; We collect data to enhance your experience and improve our services.&lt;br/&gt;
+&lt;b&gt;2.&lt;/b&gt; Your data will never be sold or shared with third parties without your consent, except as required by law.&lt;br/&gt;
+&lt;b&gt;3.&lt;/b&gt; Cookies may be used to personalize content and ads.&lt;br/&gt;
+&lt;b&gt;4.&lt;/b&gt; By continuing to use the app, you consent to our use of cookies.&lt;br/&gt;&lt;br/&gt;
 
-    &lt;b&gt;1.&lt;/b&gt; We collect data to enhance your experience and improve our services.&lt;br/&gt;
-    &lt;b&gt;2.&lt;/b&gt; Your data will never be sold or shared with third parties without your consent, except as required by law.&lt;br/&gt;
-    &lt;b&gt;3.&lt;/b&gt; Cookies may be used to personalize content and ads.&lt;br/&gt;
-    &lt;b&gt;4.&lt;/b&gt; By continuing to use the app, you consent to our use of cookies.&lt;br/&gt;&lt;br/&gt;
+&lt;b&gt;DISCLAIMER&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;
 
-    &lt;b&gt;DISCLAIMER&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;
-
-    &lt;b&gt;1.&lt;/b&gt; This app is provided as-is without any warranties of any kind.&lt;br/&gt;
-    &lt;b&gt;2.&lt;/b&gt; We do not guarantee uninterrupted or error-free use of the app.&lt;br/&gt;
-    &lt;b&gt;3.&lt;/b&gt; We are not liable for any damages resulting from the use of this app.&lt;br/&gt;
-    &lt;b&gt;4.&lt;/b&gt; Always use caution when interacting with unknown parties through the app.&lt;br/&gt;&lt;br/&gt;
-
-    Please scroll to the bottom to continue.
-</string>
-
-
+&lt;b&gt;1.&lt;/b&gt; This app is provided as-is without any warranties of any kind.&lt;br/&gt;
+&lt;b&gt;2.&lt;/b&gt; We do not guarantee uninterrupted or error-free use of the app.&lt;br/&gt;
+&lt;b&gt;3.&lt;/b&gt; We are not liable for any damages resulting from the use of this app.&lt;br/&gt;
+&lt;b&gt;4.&lt;/b&gt; Always use caution when interacting with unknown parties through the app.&lt;br/&gt;&lt;br/&gt;
+    </string>
 
     <!-- Password Change Window Strings -->
     <string name="change_password_page">Change Password</string>
@@ -106,7 +185,7 @@
 
     <!-- Sign Out Window Strings -->
     <string name="sign_out_page">Sign Out</string>
-    <string name="confirmSOTxt">Do you want to sign out?</string>
+    <string name="confirmSOTxt">Are you sure you want to sign out?</string>
     <string name="cancelSOBtn">Cancel</string>
 
     <!-- Delete Account Window Strings -->
@@ -134,6 +213,7 @@
     <string name="report_btn">Report</string>
     <string name="help_btn">Help</string>
     <string name="about_btn">Privacy Policy</string>
+    <string name="about_us_btn">About Us</string>
 
     <!-- Filtering Rules Strings -->
     <string name="keywords_label">Keywords</string>
@@ -154,7 +234,8 @@
     <string name="agree_terms_and_conditions">I agree to the terms and conditions</string>
 
     <!-- Detection Page Strings -->
-    <string name="pnTitle">Phone: </string>
+    <string name="delete_text">Delete</string>
+    <string name="pnTitle">Number: </string>
     <string name="msgTitle">Message: </string>
     <string name="dateTitle">Date: </string>
 
@@ -164,6 +245,7 @@
 
     <!-- Notification Page Strings -->
     <string name="notification_header">Notifications</string>
+    <string name="notification_icon_alt">Notification icon</string>
     <string name="news_notification_title">News Updates</string>
     <string name="smishing_detection_notification_title">Smishing Detections</string>
     <string name="spam_detection_notification_title">Spam Detections</string>
@@ -175,7 +257,6 @@
     <string name="detection_notification_header">Detection Notifications</string>
     <string name="push_notification_header">Push Notifications</string>
     <string name="system_maintenance_header">System Maintenance Notifications</string>
-
 
     <!-- NotificationHelper Strings -->
     <string name="detection_channel_name">Detection Alerts</string>
@@ -217,10 +298,7 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails</string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="title_activity_signup">SignupActivity</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
-
 
     <!-- Added strings -->
     <string name="terms_and_conditions_content">Your terms and conditions content here.</string>
@@ -247,13 +325,13 @@
     <string name="reportDate">Date</string>
     <string name="savedReportsMenu">Saved Reports</string>
 
+<!---Updated upstream -->
     <string name="feedback">Feedback</string>
     <string name="rate_your_experience">Rate your experience</string>
     <string name="enter_feedback">Enter feedback</string>
     <string name="enter_email">Enter email</string>
     <string name="name">Name</string>
     <string name="image_description">image_description</string>
-    <string name="submit_feedback">Submit_feedback</string>
     <string name="forums">Forums</string>
     <string name="community_forum">Community Forum</string>
     <string name="create_forum_topic">Create Forum Topic</string>
@@ -271,6 +349,19 @@
     <string name="start_a_new_post">Start a new post</string>
     <string name="submitfeedback">Submit Feedback</string>
     <string name="community">Community</string>
+=======
+    <!--profile pic des -->
+      <string name="edit_feedback">Edit Feedback</string>
+      <string name="delete_selected">Delete Selected</string>
+      <string name="cancel">Cancel</string>
+      <string name="select">Select</string>
+      <string name="update_feedback">Update Feedback</string>
+      <string name="rating_very_bad">😞 Very Bad</string>
+      <string name="rating_bad">😕 Bad</string>
+      <string name="rating_okay">😐 Okay</string>
+      <string name="rating_good">🙂 Good</string>
+      <string name="rating_excellent">🤩 Excellent</string>
+>>>>>>> Stashed changes
 
     <!-- community post -->
     <string name="title">Title</string>
@@ -278,14 +369,194 @@
     <string name="community_comments">Comments</string>
     <string name="add_community_comment">Add a comment...</string>
     <string name="submit_community_comment">Submit Comment</string>
+    <string name="share_post">share post</string>
 
     <string name="confirm_delete_account_title">Hello there</string>
-    <string name="delete_account_warning_message">
-    You have selected delete account. Are you sure about this?
-    If you choose to delete your account, we will disable it for 30 days.
-    If you choose to reactivate your account, login within 30 days.
-    </string>
+    <string name="delete_account_warning_message">You have selected delete account. Are you sure about this? If you choose to delete your account, we will disable it for 30 days. If you choose to reactivate your account, login within 30 days.</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="login_with_pin">Login with PIN</string>
+
+    <!-- Reporting strings -->
+    <string name="reporting_activity_tvStep1Indicator">Step 1 of 2</string>
+    <string name="reporting_activity_tvStep2Indicator">Step 2 of 2</string>
+    <string name="reporting_activity_etName">Name</string>
+    <string name="reporting_activity_etEmail">Email</string>
+    <string name="reporting_activity_etMobile">Mobile Number</string>
+    <string name="reporting_activity_etLastName">Last Name</string>
+    <string name="reporting_activity_etAddress">Address</string>
+    <string name="reporting_activity_etPostalCode">Postal Code</string>
+    <string name="reporting_activity_etCountry">Country</string>
+    <string name="reporting_activity_btnNext">Next</string>
+    <string name="reporting_activity_btnBackStep1">Back</string>
+    <string name="reporting_activity_etDescription">Description</string>
+    <string name="reporting_activity_etTypeOfAttack">Type of Attack</string>
+    <string name="reporting_activity_etHowToPrevent">How to Prevent</string>
+    <string name="reporting_activity_etDateReceived">Date Received</string>
+    <string name="reporting_activity_btnSelectImage">Select Image (optional)</string>
+    <string name="reporting_activity_btnSubmitReport">SUBMIT</string>
+
+    <string name="alert">triangle with exclamation mark</string>
+
+    <!-- Account / Sorting -->
+    <string name="account_details">Account Details</string>
+    <string name="about_us">About Us</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="newest_to_oldest">Newest to Oldest</string>
+    <string name="oldest_to_newest">Oldest to Newest</string>
+    <string name="sort_by">Sort By</string>
+    <string name="password_and_security">Password and Security</string>
+    <string name="account_details_text">Account Details</string>
+
+    <!-- Settings Section Headers -->
+    <string name="notifications_text">Notifications</string>
+    <string name="filtering_text">Filtering</string>
+    <string name="accessibility_text">Accessibility</string>
+    <string name="Community_and_Report">Community and Reporting</string>
+    <string name="MoreInfoandSupport">More Info and Support</string>
+
+    <!-- Accessibility Alt Texts -->
+    <string name="account_user_svg_alt">Black outline of a persons head and body</string>
+    <string name="back_button_alt">Black circle outline with a black arrow pointing to the left</string>
+    <string name="background_gradient_alt">Black outline of a square</string>
+    <string name="baseline_access_time_24_alt">Black circle with two lines representing the time 12:20</string>
+    <string name="bell_svg_alt">Black outline of a bell</string>
+    <string name="filter_svg_alt">Black outline of a filter where the top is slightly ajar</string>
+    <string name="hardhat_logo_alt">Yellow shield with a dark blue outline with two oval rings crossing with a yellow construction hat above the shield</string>
+    <string name="notification_svg1_alt">Black outline of a bell</string>
+    <string name="outline_arrow_outward_24_alt">Black arrow pointing towards the top right</string>
+    <string name="outline_archive_24_alt">Black outline of a box with a solid black arrow pointing down</string>
+    <string name="icon_information_alt">Black outline of a circle with a black i in the center</string>
+    <string name="always_underline_links">Always underline links</string>
+    <string name="report_svg_alt">Black flag outline</string>
+    <string name="baseline_archive_24_alt">Black solid box with a hollow arrow pointing down</string>
+    <string name="baseline_arrow_back_24_alt">Black arrow pointing to the left</string>
+    <string name="bot_message_background_alt">Plain light cream coloured square with rounded corners</string>
+    <string name="button_background_alt">Plain light blue coloured square with rounded corners</string>
+    <string name="card_rounded_alt">Plain light cream coloured square with rounded corners</string>
+    <string name="chat_assistant_svg_alt">White outline of a rectangular chat bubble with three white dots in a horizontal line in the center</string>
+    <string name="circle_background_alt">Plain light blue coloured circle</string>
+    <string name="close_button_alt">Black x</string>
+    <string name="counter_buttons_alt">Dark blue square with rounded corners that is transitioning colours to a light blue</string>
+    <string name="email_icon_alt">Black email icon</string>
+    <string name="emoji_background_alt">Plain white circle</string>
+    <string name="faq_icon_alt">Black question mark</string>
+    <string name="feedback_icon_alt">Solid black square chat bubble with an exclamation mark in the center</string>
+    <string name="hardhat_logo_notif_alt">Yellow shield with a dark blue outline with two oval rings crossing with a yellow construction hat above the sheild</string>
+    <string name="help_svg_alt">Black outline of a circle with a black question mark in the center</string>
+    <string name="ic_launcher_background_alt">Neon yellow with a white square grid</string>
+    <string name="ic_launcher_foreground_alt">Top half of a white robot head with two atennas</string>
+    <string name="icons8_home_48_alt">Black outline of a house</string>
+    <string name="icons8_house_48_alt">Black outline of a house with a solid black roof</string>
+    <string name="icons8_news_48_alt">Black outline of a piece of paper folded in half behind itself</string>
+    <string name="icons8_settings_48_alt">Black outline of a gear</string>
+    <string name="message_input_background_alt">Plain white square with rounded corners</string>
+    <string name="new_5_svg_alt">Black outline of a icosagon with the word new in the center positioned at a slight angle</string>
+    <string name="outline_bookmark_24_alt">Solid black bookmark icon</string>
+    <string name="phone_icon_alt">Solid black phone icon</string>
+    <string name="primary_button_alt">Neon green square</string>
+    <string name="send_button_background_alt">Solid dark blue circle</string>
+    <string name="send_icon_alt">White tringle pointing to the right with a thinner triangle shape removed from the center</string>
+    <string name="side_nav_bar_alt">Solid teal square</string>
+    <string name="user_message_background_alt">Solid dark blue square</string>
+    <string name="icon_view_alt">View detections icon</string>
+    <string name="icon_scan_alt">Risk scanner icon</string>
+    <string name="accessibility_icon_alt">Accessibility icon</string>
+
+    <!-- Miscellaneous -->
+    <string name="buttons_rounded_alt">Rounded corner background used for buttons</string>
+    <string name="menu_icon_alt">Hamburger menu icon in the top navigation bar</string>
+    <string name="bold_text">Bold Text</string>
+    <string name="saved_news">Saved News</string>
+    <string name="news_list">News articles list</string>
+    <string name="bookmark">Bookmark for News</string>
+    <string name="app_logo_description">Smishing App Logo</string>
+    <string name="feedback_history">Feedback History</string>
+    <string name="Forums_and_Report">Forums &amp; Report</string>
+    <string name="word_count_format">Words: %1$d / %2$d</string>
+    <string name="feedback_success">Feedback submitted successfully!</string>
+
+    <string name="invite_friend">Invite a Friend</string>
+    <string name="share_to_story">Share to story</string>
+
+
+
+    <!-- Contact Us Strings -->
+    <string name="contact_us">Contact Us</string>
+    <string name="app_logo">App Logo</string>
+    <string name="contact_subtext">Would you like more information about our services? Ask us all your questions, we will answer you as soon as possible.</string>
+    <string name="send_message_title">Send us a message</string>
+
+    <!-- Required Field Hints -->
+    <string name="business_email_hint">Business Email *</string>
+    <string name="first_name_hint">First Name *</string>
+    <string name="last_name_hint">Last Name *</string>
+    <string name="company_hint">Company *</string>
+    <string name="phone_hint">Phone *</string>
+    <string name="message_hint">Message *</string>
+
+    <!-- Checkboxes -->
+    <string name="your_request">Your request *</string>
+    <string name="checkbox_fake_sms">Report a suspicious SMS</string>
+    <string name="checkbox_feature_request">Request a new detection feature</string>
+    <string name="checkbox_feedback">Send feedback about the app</string>
+    <string name="checkbox_other">Other inquiries</string>
+
+    <!-- Button -->
+    <string name="send_message_button">Send My Message</string>
+
+    <!-- Privacy Note -->
+    <string name="privacy_note">Vaadata processes your personal data in order to send you the requested resource and to send you news and information relating to security and penetration testing. You can unsubscribe at any time via the unsubscribe links. For further information, please consult our Privacy Policy.</string>
+
+    <!-- feedback page  -->
+    <string name="enter_name">Your name</string>
+    <string name="word_count_default">Words: 0 / 150</string>
+    <string name="word_limit_warning">You have exceeded the 150-word limit.</string>
+    <string name="view_recent_feedback">View Recent Feedback</string>
+    <string name="rating_popup_text">Tap the stars to rate your experience.</string>
+    <string name="hint_name">Your name</string>
+    <string name="hint_feedback">Enter feedback</string>
+    <string name="rating_label">Rate your experience</string>
+    <string name="submit_feedback">Submit Feedback</string>
+
+    <!-- Common Topics -->
+    <string name="detect_smishing_title">How to Detect Smishing Messages?</string>
+    <string name="detect_smishing_content">Our Smishing App can automatically detect and block all smishing messages you receive. Do not worry! We will do our best to protect your safety.</string>
+    <string name="report_sms_title">How to report a suspicious SMS?</string>
+    <string name="report_sms_content">To report a suspicious SMS, click on “Settings” at the lower right corner on the homepage of our smishing app, found "Report" button under sub-title "Community and Reporting", fill in your personal information and information of a suspicious SMS to report it.</string>
+    <string name="smishing_vs_phishing_title">What is smishing vs. phishing?</string>
+    <string name="smishing_vs_phishing_content">Smishing is phishing via SMS, tricking users into clicking malicious links or sharing personal info. Phishing typically uses emails or fake websites to do the same. Both aim to steal sensitive data.</string>
+
+    <string name="terms_and_conditions_title">Terms And Conditions</string>
+    <string name="please_scroll_to_the_bottom_to_proceed">Please scroll to bottom to proceed.</string>
+    <string name="accept_and_go_back_to_registration">Accept and Proceed with Registration.</string>
+
+    <string name="label_username">👤 Username</string>
+    <string name="label_feedback_message">💬 Feedback message</string>
+    <string name="options_menu">More options</string>
+
+    <string-array name="search_fields">
+        <item>All</item>
+        <item>Username</item>
+        <item>Date</item>
+        <item>Title</item>
+        <item>Description</item>
+        <item>Likes</item>
+        <item>Comments</item>
+    </string-array>
+
+    <!-- Preference Summaries -->
+    <string name="signature_summary">Add a signature to your messages</string>
+    <string name="reply_summary">Choose how replies are handled</string>
+    <string name="sync_summary">Enable or disable auto-sync</string>
+    <string name="example_summary">This is an example preference summary</string>
+
+    <string name="view_profile">View Profile</string>
+    <string name="user_profile_title">User Profile</string>
+    <string name="profile_picture_desc">Profile Picture</string>
+    <string name="address_label">Address</string>
+    <string name="edit_button">Edit</string>
+    <string name="view_risk_profile">View Risk Profile</string>
+    <string name="save_button">Save</string>
 
 </resources>
