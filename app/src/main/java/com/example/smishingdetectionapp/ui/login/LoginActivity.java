@@ -2,13 +2,9 @@ package com.example.smishingdetectionapp.ui.login;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.media.projection.MediaProjectionManager;
 import android.os.Bundle;
 import android.text.InputType;
-//import android.text.method.HideReturnsTransformationMethod;
-//import android.text.method.PasswordTransformationMethod;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -55,7 +51,6 @@ public class LoginActivity extends AppCompatActivity {
     private DatabaseAccess databaseAccess;
     //private Object BuildConfig;
     private String BASE_URL = BuildConfig.SERVERIP;
-    private boolean isPasswordVisible = false;
 
     GoogleSignInOptions gso;
     GoogleSignInClient gsc;
@@ -64,10 +59,6 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // BLOCKING screenshots and screen recording
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
-                WindowManager.LayoutParams.FLAG_SECURE);
 
         // Inflate layout
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
@@ -100,13 +91,10 @@ public class LoginActivity extends AppCompatActivity {
         final SignInButton googleBtn = binding.googleBtn;
         final Button registerButton = binding.registerButton;
         final ImageButton togglePasswordVisibility = binding.togglePasswordVisibility;
-        final Button togglePinLogin = binding.togglePinLogin;
+        final Button togglePinLogin = (Button) binding.togglePinLogin;  // Added missing reference for togglePinLogin button
 
         // Toggle functionality for PIN and Password login
         togglePinLogin.setOnClickListener(v -> {
-            passwordEditText.setText("");
-
-
             if (isPinLogin) {
                 // Switch to password login
                 passwordEditText.setHint("Password");
@@ -122,7 +110,6 @@ public class LoginActivity extends AppCompatActivity {
                 togglePinLogin.setText("Login with Password");
                 isPinLogin = true;
             }
-            passwordEditText.requestFocus();
         });
 
         // Handle login button click
@@ -203,49 +190,19 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
-        /*
         // Password visibility toggle
         togglePasswordVisibility.setOnClickListener(v -> {
-            // Check the current input type to determine if the password is visible
-            int currentInputType = passwordEditText.getInputType();
-
-            if (currentInputType == (InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD)) {
-                // If the password is currently hidden (password transformation is applied), show the password
-                passwordEditText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD); // Show the password
-                togglePasswordVisibility.setImageResource(R.drawable.visibility);  // Open eye icon
-            } else {
-                // If the password is currently visible, hide the password
-                passwordEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD); // Hide the password
-                togglePasswordVisibility.setImageResource(R.drawable.visibilityoff);  // Closed eye icon
-            }
-
-            // Move the cursor to the end
-            passwordEditText.setSelection(passwordEditText.getText().length());
-        });
-
-    }*/
-
-        togglePasswordVisibility.setOnClickListener(v -> {
+            boolean isPasswordVisible = passwordEditText.getTransformationMethod() == null;
             if (isPasswordVisible) {
-                // Hide password
                 passwordEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                togglePasswordVisibility.setImageResource(R.drawable.visibilityoff); // lighter icon
-                isPasswordVisible = false;
+                togglePasswordVisibility.setImageResource(R.drawable.ic_passwords_visibility);
             } else {
-                // Show password
                 passwordEditText.setInputType(InputType.TYPE_CLASS_TEXT);
-                togglePasswordVisibility.setImageResource(R.drawable.visibility); // darker icon
-                isPasswordVisible = true;
+                togglePasswordVisibility.setImageResource(R.drawable.ic_passwords_visibility);
             }
-
-            // cursor stays at end of input
             passwordEditText.setSelection(passwordEditText.getText().length());
         });
-
-
     }
-    //
 
     // Google Sign-In
     void signInGoogle() {
@@ -276,6 +233,30 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    /*
+    private void loginWithPin(String pin) {
+        // Open the database
+        DatabaseAccess databaseAccess = DatabaseAccess.getInstance(this);
+        databaseAccess.open();
+
+        // Validate the PIN
+        boolean isValid = databaseAccess.validatePin(pin);
+
+        if (isValid) {
+            // PIN is valid
+            Toast.makeText(LoginActivity.this, "PIN verified successfully", Toast.LENGTH_SHORT).show();
+            navigateToMainActivity();
+        } else {
+            // Invalid PIN
+            Toast.makeText(LoginActivity.this, "Invalid PIN. Please try again.", Toast.LENGTH_LONG).show();
+        }
+
+        // Close the database
+        databaseAccess.close();
+    }
+
+     */
+
     private void loginWithPin(String pin) {
         if (canUseDebugBypassWithPin(pin)) {
             Toast.makeText(LoginActivity.this, "Debug PIN login successful", Toast.LENGTH_SHORT).show();
@@ -290,6 +271,25 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+
+    /*
+    private void loginWithPassword(String email, String password) {
+        DatabaseAccess databaseAccess = DatabaseAccess.getInstance(this);
+        databaseAccess.open();
+
+        boolean isValid = databaseAccess.validateLogin(email, password);
+
+        if (isValid) {
+            navigateToMainActivity();
+        } else {
+            Toast.makeText(LoginActivity.this, "Invalid email or password", Toast.LENGTH_LONG).show();
+        }
+
+        databaseAccess.close();
+    }
+
+     */
+
     private void loginWithPassword(String email, String password) {
         if (canUseDebugBypassWithPassword(email, password)) {
             Toast.makeText(LoginActivity.this, "Debug login successful", Toast.LENGTH_SHORT).show();
@@ -297,6 +297,10 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
+
+    private void handleLoginDialog() {
+        final EditText usernameEditText = binding.email;
+        final EditText passwordEditText = binding.password;
         if (databaseAccess.validateLogin(email, password)) {
             navigateToMainActivity();
             return;
@@ -346,35 +350,5 @@ public class LoginActivity extends AppCompatActivity {
 
     private void showLoginFailed(@StringRes Integer errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
-    }
-
-    private boolean canUseDebugBypassWithPassword(String email, String password) {
-        return BuildConfig.DEBUG
-                && !BuildConfig.DEBUG_LOGIN_EMAIL.isEmpty()
-                && !BuildConfig.DEBUG_LOGIN_PASSWORD.isEmpty()
-                && BuildConfig.DEBUG_LOGIN_EMAIL.equals(email)
-                && BuildConfig.DEBUG_LOGIN_PASSWORD.equals(password);
-    }
-
-    private boolean canUseDebugBypassWithPin(String pin) {
-        return BuildConfig.DEBUG
-                && !BuildConfig.DEBUG_LOGIN_PIN.isEmpty()
-                && BuildConfig.DEBUG_LOGIN_PIN.equals(pin);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        // Reapply the secure flag when activity resumes
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
-                WindowManager.LayoutParams.FLAG_SECURE);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (databaseAccess != null) {
-            databaseAccess.close();
-        }
     }
 }

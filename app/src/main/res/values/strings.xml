@@ -213,6 +213,7 @@
     <string name="report_btn">Report</string>
     <string name="help_btn">Help</string>
     <string name="about_btn">Privacy Policy</string>
+    <string name="about_us_btn">About Us</string>
 
     <!-- Filtering Rules Strings -->
     <string name="keywords_label">Keywords</string>
