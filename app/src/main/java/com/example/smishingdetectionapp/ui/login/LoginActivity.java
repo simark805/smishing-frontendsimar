@@ -48,8 +48,6 @@ public class LoginActivity extends AppCompatActivity {
     private ActivityLoginBinding binding;
     private Retrofit retrofit;
     private Retrofitinterface retrofitinterface;
-    private DatabaseAccess databaseAccess;
-    //private Object BuildConfig;
     private String BASE_URL = BuildConfig.SERVERIP;
 
     GoogleSignInOptions gso;
@@ -301,13 +299,6 @@ public class LoginActivity extends AppCompatActivity {
     private void handleLoginDialog() {
         final EditText usernameEditText = binding.email;
         final EditText passwordEditText = binding.password;
-        if (databaseAccess.validateLogin(email, password)) {
-            navigateToMainActivity();
-            return;
-        }
-
-        handleLoginDialog(email, password);
-    }
 
     private void handleLoginDialog(String email, String password) {
         HashMap<String, String> map = new HashMap<>();
