@@ -46,8 +46,7 @@ public class SignupActivity extends AppCompatActivity {
         passwordInput = findViewById(R.id.pwInput);
         confirmPasswordInput = findViewById(R.id.pw2Input);
         pinInput = findViewById(R.id.pinInput);
-        passwordStrengthBar = findViewById(R.id.passwordStrengthBar);
-        passwordStrengthLabel = findViewById(R.id.passwordStrengthLabel);
+
 
         // Disable the register button initially
         registerButton.setEnabled(false);

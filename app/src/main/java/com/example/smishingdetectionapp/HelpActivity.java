@@ -1,96 +1,88 @@
 package com.example.smishingdetectionapp;
 
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageButton;
-
-import androidx.activity.EdgeToEdge;
+import android.widget.Toast;
 
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-
-import com.example.smishingdetectionapp.Community.CommunityReportActivity;
-import com.example.smishingdetectionapp.ui.FaqActivity;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.example.smishingdetectionapp.navigation.BottomNavCoordinator;
+import com.example.smishingdetectionapp.ui.FaqActivity;
 import com.google.android.material.card.MaterialCardView;
 
-
 public class HelpActivity extends SharedActivity {
-    // key used by FaqActivity to auto-expand the matching item
-    public static final String EXTRA_FAQ_KEY = "faq_key";
-
-    private void openFaq(String key) {
-        Intent i = new Intent(this, FaqActivity.class);
-        if (key != null) i.putExtra(EXTRA_FAQ_KEY, key);
-        startActivity(i);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help_updated);
 
-        BottomNavCoordinator.setup(this, R.id.nav_settings);
+        BottomNavCoordinator.setup(this, R.id.bottom_navigation);
 
-        // Adjust padding for system insets
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        // Back button to go back to settings dashboard
-        ImageButton report_back = findViewById(R.id.report_back);
-        report_back.setOnClickListener(v -> {
-            startActivity(new Intent(this, SettingsActivity.class));
-            finish();
-        });
+        // Back button
+        ImageButton backBtn = findViewById(R.id.help_back);
+        if (backBtn != null) {
+            backBtn.setOnClickListener(v -> finish());
+        }
 
-        // Contact Us
-        RelativeLayout rv2 = findViewById(R.id.rv_2);
-        rv2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent phoneIntent = new Intent(Intent.ACTION_DIAL);
-                phoneIntent.setData(Uri.parse("tel:+1234567890"));
-                startActivity(phoneIntent);
-            }
-        });
+        // Call Us
+        MaterialCardView callUs = findViewById(R.id.cardCallUs);
+        if (callUs != null) {
+            callUs.setOnClickListener(v -> {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:+1234567890"));
+                startActivity(intent);
+            });
+        }
 
         // Mail Us
-        RelativeLayout rv1 = findViewById(R.id.rv_1);
-        rv1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
-                emailIntent.setData(Uri.parse("mailto:support@example.com"));
-                startActivity(emailIntent);
-            }
-        });
+        MaterialCardView mailUs = findViewById(R.id.cardMailUs);
+        if (mailUs != null) {
+            mailUs.setOnClickListener(v -> {
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setData(Uri.parse("mailto:support@example.com"));
+                startActivity(intent);
+            });
+        }
 
         // FAQ
-        RelativeLayout rv3 = findViewById(R.id.rv_3);
-        rv3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(HelpActivity.this, "Faq", Toast.LENGTH_SHORT).show();
-            }
-        });
+        MaterialCardView faq = findViewById(R.id.cardFAQ);
+        if (faq != null) {
+            faq.setOnClickListener(v -> {
+                startActivity(new Intent(this, FaqActivity.class));
+            });
+        }
 
-        // Feedback - navigate to FeedbackActivity
-        RelativeLayout rv4 = findViewById(R.id.rv_4);
-        rv4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(HelpActivity.this, FeedbackActivity.class));
-                finish();
-            }
-        });
+        // Feedback
+        MaterialCardView feedback = findViewById(R.id.cardFeedback);
+        if (feedback != null) {
+            feedback.setOnClickListener(v -> {
+                startActivity(new Intent(this, FeedbackActivity.class));
+            });
+        }
+
+        // Optional topic cards (safe if present)
+        setupOptionalCard(R.id.cardTopic1, "How to detect a smishing message");
+        setupOptionalCard(R.id.cardTopic2, "How to report a suspicious SMS");
+        setupOptionalCard(R.id.cardTopic3, "What is smishing vs phishing?");
+    }
+
+    private void setupOptionalCard(int id, String message) {
+        MaterialCardView card = findViewById(id);
+        if (card != null) {
+            card.setOnClickListener(v ->
+                    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+            );
+        }
     }
 }

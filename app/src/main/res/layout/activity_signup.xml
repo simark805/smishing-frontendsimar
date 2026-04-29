@@ -8,11 +8,11 @@
     android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/ConstraintLayout"
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        tools:context=".SignupActivity">
+        tools:context=".ui.Register.RegisterMain">
 
         <!-- Back Button -->
         <ImageButton
@@ -34,9 +34,9 @@
             android:layout_marginTop="32dp"
             android:contentDescription="@string/logo_description"
             android:src="@drawable/hardhat_logo"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <!-- Title -->
         <TextView
@@ -48,11 +48,11 @@
             android:textColor="@color/navy_blue"
             android:textSize="28sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/logo"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/logo" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Input Fields -->
+        <!-- Inputs -->
         <EditText
             android:id="@+id/full_name_input"
             android:layout_width="0dp"
@@ -60,10 +60,9 @@
             android:layout_margin="16dp"
             android:hint="@string/name_label"
             android:inputType="text"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/signupTitle"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/signupTitle" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <EditText
             android:id="@+id/pnInput"
@@ -72,10 +71,9 @@
             android:layout_margin="16dp"
             android:hint="@string/phone_label"
             android:inputType="phone"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/full_name_input"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/full_name_input" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <EditText
             android:id="@+id/emailInput"
@@ -84,10 +82,9 @@
             android:layout_margin="16dp"
             android:hint="@string/email_label"
             android:inputType="textEmailAddress"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pnInput"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/pnInput" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <EditText
             android:id="@+id/pinInput"
@@ -96,10 +93,9 @@
             android:layout_margin="16dp"
             android:hint="@string/Pin_label"
             android:inputType="numberPassword"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/emailInput"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/emailInput" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <EditText
             android:id="@+id/pwInput"
@@ -108,51 +104,20 @@
             android:layout_margin="16dp"
             android:hint="@string/pw_register_label"
             android:inputType="textPassword"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pinInput"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/pinInput" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Password Note -->
         <TextView
             android:id="@+id/password_note"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="4dp"
-            android:text="Password must be minimum 8 characters, with an uppercase and a special character."
-            android:textColor="@color/black"
+            android:layout_margin="16dp"
+            android:text="Password must be 8+ chars with uppercase, lowercase, number, and special character."
             android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pwInput"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/pwInput" />
-
-        <!-- NEW: Password Strength Bar -->
-        <View
-            android:id="@+id/passwordStrengthBar"
-            android:layout_width="0dp"
-            android:layout_height="6dp"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="6dp"
-            android:background="@android:color/darker_gray"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/password_note" />
-
-        <!-- NEW: Password Strength Label -->
-        <TextView
-            android:id="@+id/passwordStrengthLabel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="2dp"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/passwordStrengthBar" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <EditText
             android:id="@+id/pw2Input"
@@ -161,56 +126,48 @@
             android:layout_margin="16dp"
             android:hint="@string/pw2_register_label"
             android:inputType="textPassword"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/password_note"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/passwordStrengthLabel" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Terms Container -->
+        <!-- 🔥 FIXED TERMS SECTION (THIS FIXES YOUR ERROR) -->
         <LinearLayout
             android:id="@+id/terms_container"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="28dp"
-            android:layout_marginEnd="16dp"
+            android:layout_margin="16dp"
             android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintTop_toBottomOf="@id/pw2Input"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/pw2Input">
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <CheckBox
+                android:id="@+id/terms_condition_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/terms_conditions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="I agree to Terms and Conditions"
+                android:textColor="@color/red"
+                android:textStyle="bold"
+                android:paddingStart="8dp" />
         </LinearLayout>
 
+        <!-- Register Button -->
         <Button
             android:id="@+id/registerBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="56dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/button_background"
-            android:enabled="false"
+            android:layout_margin="16dp"
             android:text="@string/register_btn"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/terms_container" />
-
-        <TextView
-            android:id="@+id/terms_conditions"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:autoLink="none"
-            android:linksClickable="true"
-            android:text="Click here to accept the terms and complete registration."
-            android:textColor="@color/red"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="32dp"
+            android:enabled="false"
             app:layout_constraintTop_toBottomOf="@id/terms_container"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </ScrollView>
