@@ -104,8 +104,8 @@ public class LoginActivity extends AppCompatActivity {
                 // Switch to PIN login
                 passwordEditText.setHint("Enter 6-digit PIN");
                 passwordEditText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
-                loginButton.setText("Login with PIN");
-                togglePinLogin.setText("Login with Password");
+                loginButton.setText("Sign in with PIN");
+                togglePinLogin.setText("Sign in with Password");
                 isPinLogin = true;
             }
         });
@@ -116,7 +116,7 @@ public class LoginActivity extends AppCompatActivity {
             if (isPinLogin) {
                 // Handle PIN login
                 if (input.length() != 6) {
-                    passwordEditText.setError("PIN must be 6 digits");
+                    passwordEditText.setError("PIN must contains 6 digits");
                     return;
                 }
                 loginWithPin(input);
@@ -124,7 +124,7 @@ public class LoginActivity extends AppCompatActivity {
                 // Handle password login
                 String email = usernameEditText.getText().toString();
                 if (email.isEmpty() || input.isEmpty()) {
-                    Toast.makeText(LoginActivity.this, "Email and Password must not be empty", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Please enter both email and password", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 loginWithPassword(email, input);
@@ -145,7 +145,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // Sign out of Google account to allow fresh authentication
         gsc.signOut().addOnCompleteListener(task -> {
-            Toast.makeText(this, "Signed out. Ready for fresh authentication.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Signed out successfully. You may sign in again.", Toast.LENGTH_SHORT).show();
         });
 
         // Handle Google Sign-In button click
@@ -211,7 +211,7 @@ public class LoginActivity extends AppCompatActivity {
     // Google Sign-Out
     void signOutGoogle(Runnable onSignOutComplete) {
         gsc.signOut().addOnCompleteListener(task -> {
-            Toast.makeText(this, "Signed out of Google account.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Successfully signed out of Google account.", Toast.LENGTH_SHORT).show();
             onSignOutComplete.run();
         });
     }
@@ -226,7 +226,7 @@ public class LoginActivity extends AppCompatActivity {
                 task.getResult(ApiException.class);
                 navigateToMainActivity();
             } catch (ApiException e) {
-                Toast.makeText(getApplicationContext(), "Authentication failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Authentication was unsuccessful. Please try again", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -265,7 +265,7 @@ public class LoginActivity extends AppCompatActivity {
         if (databaseAccess.validatePin(pin)) {
             navigateToMainActivity();
         } else {
-            Toast.makeText(LoginActivity.this, "Invalid PIN", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, "Invalid PIN entered", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -312,7 +312,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (response.code() == 200) {
                     navigateToMainActivity();
                 } else if (response.code() == 404) {
-                    Toast.makeText(LoginActivity.this, "Wrong Credentials", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "Incorrect login Credentials", Toast.LENGTH_LONG).show();
                 }
             }
 
