@@ -154,6 +154,12 @@ public class SettingsActivity extends AppCompatActivity {
             startActivity(new Intent(this, NotificationActivity.class));
         });
 
+        // Password and Security button
+        Button passwordBtn = findViewById(R.id.passwordBtn);
+        passwordBtn.setOnClickListener(v -> {
+            startActivity(new Intent(this, PasswordSecurityActivity.class));
+        });
+
         // Filtering button to switch to Smishing rules page
         ImageView filteringBtn = findViewById(R.id.imageView7);
         if (filteringBtn != null) {
@@ -405,12 +411,6 @@ public class SettingsActivity extends AppCompatActivity {
         });
     }
 
-    // Open AccountActivity directly
-    private void openAccountActivity() {
-        startActivity(new Intent(SettingsActivity.this, AccountActivity.class));
-        finish();
-    }
-
     private void restoreScrollPosition() {
         savedPosition = prefs.getInt("scroll_pos", 0);
         if (isTaskRoot()) {
@@ -431,10 +431,5 @@ public class SettingsActivity extends AppCompatActivity {
         if (!prefs.getBoolean("cold_start", false)) {
             restoreScrollPosition();
         }
-    }
-}
-    // Notification button
-    public void openNotificationsActivity(View view) {
-        startActivity(new Intent(this, NotificationActivity.class));
     }
 }
