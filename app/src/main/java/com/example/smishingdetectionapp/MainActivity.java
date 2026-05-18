@@ -2,6 +2,7 @@ package com.example.smishingdetectionapp;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -46,7 +47,10 @@ public class MainActivity extends SharedActivity {
                 R.id.nav_home, R.id.nav_report, R.id.nav_news, R.id.nav_settings
         ).build();
 
-        if (!areNotificationsEnabled()) {
+        SharedPreferences prefs = getSharedPreferences("app_prefs", MODE_PRIVATE);
+        boolean bannerShown = prefs.getBoolean("notification_banner_shown", false);
+        if (!bannerShown && !areNotificationsEnabled()) {
+            prefs.edit().putBoolean("notification_banner_shown", true).apply();
             showNotificationPermissionDialog();
         }
 
