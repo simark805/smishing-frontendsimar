@@ -96,7 +96,6 @@
                     android:padding="8dp"/>
             </androidx.cardview.widget.CardView>
 
-
             <!-- Quiz Section -->
             <TextView
                 android:id="@+id/QuteQuize"
@@ -136,8 +135,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Get Started"
-                android:textColor="?attr/colorOnPrimary"
-                android:backgroundTint="?attr/colorPrimary"
+                android:textColor="@android:color/white"
+                android:backgroundTint="#567BDB"
                 app:cornerRadius="24dp"
                 android:paddingHorizontal="24dp"
                 android:paddingVertical="12dp"

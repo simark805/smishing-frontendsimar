@@ -35,7 +35,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RegisterMain extends AppCompatActivity {
 
-    private static final int TERMS_REQUEST_CODE = 1001;  // Unique request code for terms acceptance
+    private static final int TERMS_REQUEST_CODE = 1001;
     private ActivitySignupBinding binding;
     private Retrofit retrofit;
     private Retrofitinterface retrofitinterface;
@@ -67,13 +67,21 @@ public class RegisterMain extends AppCompatActivity {
         // Link Terms and Conditions
         TextView termsTextView = findViewById(R.id.terms_text);
         termsCheckBox = findViewById(R.id.terms_condition_checkbox);
+
+        // Tapping the text opens Terms and Conditions page
         termsTextView.setOnClickListener(v -> {
             Intent intent = new Intent(RegisterMain.this, TermsAndConditionsActivity.class);
             startActivityForResult(intent, TERMS_REQUEST_CODE);
         });
 
+        // Tapping the checkbox also opens Terms and Conditions page
+        termsCheckBox.setOnClickListener(v -> {
+            termsCheckBox.setChecked(false);
+            Intent intent = new Intent(RegisterMain.this, TermsAndConditionsActivity.class);
+            startActivityForResult(intent, TERMS_REQUEST_CODE);
+        });
+
         // Set up register button
-        // Test registration flow
         Button registerButton = findViewById(R.id.registerBtn);
         registerButton.setEnabled(false);
 
@@ -89,17 +97,31 @@ public class RegisterMain extends AppCompatActivity {
             }
         });
 
+        int nightModeFlags = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
 
+        if (nightModeFlags == Configuration.UI_MODE_NIGHT_YES) {
+            binding.getRoot().setBackgroundColor(ContextCompat.getColor(this, R.color.black));
+            binding.fullNameInput.setTextColor(ContextCompat.getColor(this, R.color.white));
+            binding.emailInput.setTextColor(ContextCompat.getColor(this, R.color.white));
+            binding.pnInput.setTextColor(ContextCompat.getColor(this, R.color.white));
+            binding.pwInput.setTextColor(ContextCompat.getColor(this, R.color.white));
+            binding.pw2Input.setTextColor(ContextCompat.getColor(this, R.color.white));
+        } else {
+            binding.getRoot().setBackgroundColor(ContextCompat.getColor(this, R.color.white));
+            binding.fullNameInput.setTextColor(ContextCompat.getColor(this, R.color.black));
+            binding.emailInput.setTextColor(ContextCompat.getColor(this, R.color.black));
+            binding.pnInput.setTextColor(ContextCompat.getColor(this, R.color.black));
+            binding.pwInput.setTextColor(ContextCompat.getColor(this, R.color.black));
+            binding.pw2Input.setTextColor(ContextCompat.getColor(this, R.color.black));
+        }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        // Check if we are handling the result from the Terms and Conditions activity
         if (requestCode == TERMS_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                // Terms accepted, enable the register button
                 Button registerButton = findViewById(R.id.registerBtn);
                 registerButton.setEnabled(true);
                 termsCheckBox.setChecked(true);
@@ -112,7 +134,7 @@ public class RegisterMain extends AppCompatActivity {
 
     private String generateVerificationCode() {
         Random random = new Random();
-        int code = 100000 + random.nextInt(900000); // Generate a random 6-digit code
+        int code = 100000 + random.nextInt(900000);
         return String.valueOf(code);
     }
 
@@ -209,7 +231,6 @@ public class RegisterMain extends AppCompatActivity {
             }
         });
     }
-
 
     private boolean isValidEmailAddress(String email) {
         try {

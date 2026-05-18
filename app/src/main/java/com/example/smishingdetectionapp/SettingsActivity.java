@@ -166,7 +166,13 @@ public class SettingsActivity extends AppCompatActivity {
             startActivity(new Intent(this, NotificationActivity.class));
         });
 
-        //Filtering button to switch to Smishing rules page
+        // Password and Security button
+        Button passwordBtn = findViewById(R.id.passwordBtn);
+        passwordBtn.setOnClickListener(v -> {
+            startActivity(new Intent(this, PasswordSecurityActivity.class));
+        });
+
+        // Filtering button to switch to Smishing rules page
         ImageView filteringBtn = findViewById(R.id.imageView7);
         if (filteringBtn != null) {
             filteringBtn.setOnClickListener(v -> {
@@ -439,16 +445,6 @@ public class SettingsActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
-    private void saveScrollPosition() {
-        if (scrollView != null) {
-            int scrollY = scrollView.getScrollY();
-            PreferenceManager.getDefaultSharedPreferences(this)
-                    .edit()
-                    .putInt("scroll_pos", scrollY)
-                    .apply();
-        }
-    }
-
     private void restoreScrollPosition() {
         savedPosition = prefs.getInt("scroll_pos", 0);
 
@@ -475,4 +471,3 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 }
-

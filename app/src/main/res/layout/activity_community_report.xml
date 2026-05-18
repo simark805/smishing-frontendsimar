@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <!-- Header Section (same as CommunityHomeActivity) -->
+    <!-- Header Section -->
     <LinearLayout
         android:id="@+id/headerSection"
         android:layout_width="match_parent"
@@ -59,7 +59,7 @@
         android:layout_width="match_parent"
         android:layout_height="3dp"
         android:layout_below="@id/tabNavigationContainer"
-        android:background="@color/dark_blue" />
+        android:background="@color/Dark_blue" />
 
     <!-- Report Form Content -->
     <ScrollView
@@ -76,7 +76,6 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Centered Title -->
             <TextView
                 android:id="@+id/tvReportTitle"
                 android:layout_width="match_parent"
@@ -87,7 +86,6 @@
                 android:textAlignment="center"
                 android:layout_marginBottom="4dp"/>
 
-            <!-- Centered Subtitle -->
             <TextView
                 android:id="@+id/tvReportSubtitle"
                 android:layout_width="match_parent"
@@ -97,33 +95,50 @@
                 android:textAlignment="center"
                 android:layout_marginBottom="16dp"/>
 
-            <!-- Phone Number Field -->
+            <!-- Phone Number Label -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Phone Number"
                 android:textStyle="bold"
-                android:paddingBottom="4dp"
-                android:textColor="?attr/colorOnSurface"/>
+                android:paddingBottom="4dp"/>
+
+            <!-- NEW: hint added -->
             <EditText
                 android:id="@+id/etPhoneNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="phone"
+                android:hint="+61 4XX XXX XXX"
+                android:background="@drawable/rounded_lightblue_border"
+                android:padding="12dp"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- Category Label -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Report Category"
+                android:textStyle="bold"
+                android:paddingBottom="4dp"/>
+
+            <Spinner
+                android:id="@+id/spinnerCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@drawable/rounded_lightblue_border"
                 android:padding="12dp"
                 android:layout_marginBottom="16dp"
                 android:textColor="?attr/colorOnSurface"
                 android:textColorHint="?attr/colorOnSurfaceVariant"/>
 
-            <!-- Message Content Field -->
+            <!-- Message Content Label -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Content of Message"
                 android:textStyle="bold"
-                android:paddingBottom="4dp"
-                android:textColor="?attr/colorOnSurface"/>
+                android:paddingBottom="4dp"/>
 
             <EditText
                 android:id="@+id/etMessageContent"
@@ -137,7 +152,6 @@
                 android:textColor="?attr/colorOnSurface"
                 android:textColorHint="?attr/colorOnSurfaceVariant"/>
 
-            <!-- Submit Button -->
             <Button
                 android:id="@+id/btnReportProtect"
                 android:layout_width="match_parent"
@@ -145,10 +159,10 @@
                 android:text="Report &amp; Protect"
                 android:textStyle="bold"
                 android:backgroundTint="@color/baby_blue"/>
+
         </LinearLayout>
     </ScrollView>
 
-    <!--Back button-->
     <ImageButton
         android:id="@+id/community_back"
         android:layout_width="35dp"
@@ -160,11 +174,10 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/back_button" />
 
-    <!-- Bottom Navigation (same as main) -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="70dp"
         android:layout_alignParentBottom="true"
         android:background="?android:attr/windowBackground"
         app:itemBackground="@color/baby_blue"
@@ -173,8 +186,7 @@
         app:itemIconSize="25dp"
         app:itemHorizontalTranslationEnabled="false"
         app:labelVisibilityMode="labeled"
-        app:itemPaddingBottom="10dp"
         android:theme="@style/Theme.SmishingDetectionApp"
-        app:menu="@menu/activity_main_drawer" >
-    </com.google.android.material.bottomnavigation.BottomNavigationView>
+        app:menu="@menu/activity_main_drawer" />
+
 </RelativeLayout>

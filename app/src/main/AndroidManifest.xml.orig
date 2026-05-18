@@ -54,7 +54,7 @@
         <activity
             android:name=".SplashScreen"
             android:exported="true"
-            android:theme="@style/Theme.SmishingDetectionApp.NoActionBar">
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -69,7 +69,6 @@
         <activity android:name=".TermsAndConditionsActivity" android:exported="false" />
         <activity android:name=".SignupActivity" android:exported="false" />
         <activity android:name=".SettingsActivity" android:exported="false" />
-        <activity android:name=".PasswordSecurityActivity" android:exported="false" />
 
         <!-- News -->
         <activity android:name=".NewsActivity" android:exported="false" />
@@ -91,7 +90,6 @@
         <activity android:name=".AboutMeActivity" android:exported="false" />
         <activity android:name=".ui.account.AccountActivity" android:exported="true" />
         <activity android:name=".ui.account.PopupDEL" />
-        <activity android:name=".UserProfileActivity" android:exported="false" />
 
         <!-- Onboarding & Auth -->
         <activity android:name=".ui.onboarding.OnboardingActivity" android:exported="true" />
@@ -114,6 +112,23 @@
         <activity android:name=".riskmeter.RiskScannerActivity" android:exported="true" />
         <activity android:name=".riskmeter.RiskResultActivity" android:exported="true" />
 
+<<<<<<< HEAD
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity> <!-- MainActivity is not the launcher anymore -->
+        <activity android:name=".ui.login.ForgotPasswordActivity"/>
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.SmishingDetectionApp.NoActionBar" />
+        <activity
+            android:name=".FeedbackActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ForumActivity"
+            android:exported="false" />
+=======
         <!-- UI Pages -->
         <activity android:name=".ui.CaseStudiesActivity" android:exported="false" />
         <activity android:name=".ui.SmishingTrendsActivity" android:exported="false" />
@@ -121,6 +136,7 @@
         <activity android:name=".ui.Submissionscreen" android:exported="false" />
 
         <!-- Chat -->
+>>>>>>> upstream/dev
         <activity
             android:name=".chat.ChatAssistantActivity"
             android:exported="false"

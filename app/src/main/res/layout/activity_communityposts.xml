@@ -101,6 +101,17 @@
             android:layout_centerVertical="true"
             android:src="@drawable/filter_svg"
             android:contentDescription="Filter options" />
+        <TextView
+            android:id="@+id/activeFilterLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@id/filterBtn"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="4dp"
+            android:text=""
+            android:textSize="12sp"
+            android:textColor="@android:color/holo_blue_dark"
+            android:visibility="gone"/>
     </RelativeLayout>
 
     <!-- Posts List using recyclerview i.e. CommunityPostAdapter.java -->
