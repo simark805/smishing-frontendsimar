@@ -1,8 +1,5 @@
 package com.example.smishingdetectionapp.ui.Register;
 
-import android.content.res.Configuration;
-import androidx.core.content.ContextCompat;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;

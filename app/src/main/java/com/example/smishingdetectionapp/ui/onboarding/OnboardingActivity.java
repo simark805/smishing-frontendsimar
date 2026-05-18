@@ -5,6 +5,10 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import androidx.appcompat.app.AppCompatDelegate;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -25,6 +29,16 @@ public class OnboardingActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean isDarkMode = prefs.getBoolean("dark_mode", false);
+        AppCompatDelegate.setDefaultNightMode(
+                isDarkMode
+                        ? AppCompatDelegate.MODE_NIGHT_YES
+                        : AppCompatDelegate.MODE_NIGHT_NO
+        );
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_onboarding);
 
