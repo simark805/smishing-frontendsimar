@@ -1,6 +1,7 @@
 package com.example.smishingdetectionapp;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.widget.Button;
@@ -12,7 +13,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.smishingdetectionapp.Community.CommunityReportActivity;
+import com.example.smishingdetectionapp.navigation.BottomNavCoordinator;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -58,38 +59,7 @@ public class QuizesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
-        // navigation bar
-        BottomNavigationView nav = findViewById(R.id.bottom_navigation);
-        nav.setSelectedItemId(R.id.nav_home);
-        nav.setOnItemSelectedListener(menuItem -> {
-            int id = menuItem.getItemId();
-            if (id == R.id.nav_home) {
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                overridePendingTransition(0, 0);
-                finish();
-                return true;
-
-            } else if (id == R.id.nav_report) {
-                Intent i = new Intent(this, CommunityReportActivity.class);
-                i.putExtra("source", "home");
-                startActivity(i);
-                overridePendingTransition(0,0);
-                finish();
-                return true;
-
-            } else if (id == R.id.nav_news) {
-                startActivity(new Intent(getApplicationContext(),SettingsActivity.class));
-                overridePendingTransition(0, 0);
-                finish();
-                return true;
-            } else if (id == R.id.nav_settings) {
-                startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
-                overridePendingTransition(0, 0);
-                finish();
-                return true;
-            }
-            return false;
-        });
+        BottomNavCoordinator.setup(this, R.id.nav_home);
 
         // Find views from the layout.
         questionTextView = findViewById(R.id.questionText);
@@ -177,12 +147,19 @@ public class QuizesActivity extends AppCompatActivity {
         countDownTimer = new CountDownTimer(QUESTION_TIME, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                timerTextView.setText("Time: " + millisUntilFinished / 1000 + " sec");
+                long secondsLeft = millisUntilFinished / 1000;
+                timerTextView.setText("Time: " + secondsLeft + " sec");
+                if (secondsLeft <= 5) {
+                    timerTextView.setTextColor(getResources().getColor(R.color.red, getTheme()));
+                } else {
+                    timerTextView.setTextColor(Color.parseColor("#333333"));
+                }
             }
 
             @Override
             public void onFinish() {
                 timerTextView.setText("Time's up!");
+                timerTextView.setTextColor(Color.parseColor("#333333"));
                 // Record full time (15 sec) if timer runs out.
                 timeSpentPerQuestion.add((int) (QUESTION_TIME / 1000));
                 // Auto-move to next question; leave answer as -1 (unanswered).

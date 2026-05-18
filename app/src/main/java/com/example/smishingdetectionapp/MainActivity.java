@@ -2,6 +2,7 @@ package com.example.smishingdetectionapp;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -17,14 +18,14 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.smishingdetectionapp.Community.CommunityReportActivity;
+
 import com.example.smishingdetectionapp.databinding.ActivityMainBinding;
 import com.example.smishingdetectionapp.detections.DatabaseAccess;
 import com.example.smishingdetectionapp.detections.DetectionsActivity;
 import com.example.smishingdetectionapp.RadarActivity;
 import com.example.smishingdetectionapp.notifications.NotificationPermissionDialogFragment;
 import com.example.smishingdetectionapp.riskmeter.RiskScannerTCActivity;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.example.smishingdetectionapp.navigation.BottomNavCoordinator;
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetSequence;
 
@@ -46,38 +47,15 @@ public class MainActivity extends SharedActivity {
                 R.id.nav_home, R.id.nav_report, R.id.nav_news, R.id.nav_settings
         ).build();
 
-        if (!areNotificationsEnabled()) {
+        SharedPreferences prefs = getSharedPreferences("app_prefs", MODE_PRIVATE);
+        boolean bannerShown = prefs.getBoolean("notification_banner_shown", false);
+        if (!bannerShown && !areNotificationsEnabled()) {
+            prefs.edit().putBoolean("notification_banner_shown", true).apply();
             showNotificationPermissionDialog();
         }
 
-        BottomNavigationView nav = findViewById(R.id.bottom_navigation);
-        nav.setSelectedItemId(R.id.nav_home);
-        nav.setOnItemSelectedListener(menuItem -> {
-            int id = menuItem.getItemId();
-            if (id == R.id.nav_home) {
-                return true;
-            } else if (id == R.id.nav_report) {
-                startActivity(new Intent(getApplicationContext(), CommunityReportActivity.class));
-                overridePendingTransition(0, 0);
-                return true;
-            } else if (id == R.id.nav_news) {
-                startActivity(new Intent(getApplicationContext(), NewsActivity.class));
-                overridePendingTransition(0, 0);
-                return true;
-            } else if (id == R.id.nav_settings) {
-                startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
-                overridePendingTransition(0, 0);
-                return true;
-            }
-            return false;
-        });
+        BottomNavCoordinator.setup(this, R.id.nav_home);
 
-        Button debugBtn = findViewById(R.id.debug_btn);
-        if (debugBtn != null) {
-            debugBtn.setOnClickListener(v ->
-                    startActivity(new Intent(MainActivity.this, DebugActivity.class))
-            );
-        }
 
         // ===== CLICK TARGETS FOR "VIEW DETECTIONS" AND "RISK SCANNER" =====
         // Prefer the new card containers if present; otherwise fall back to legacy buttons.
@@ -139,8 +117,8 @@ public class MainActivity extends SharedActivity {
 
         // TapTarget guide
         boolean showGuideNow = getIntent().getBooleanExtra("showGuide", false);
-        if (showGuideNow && debugBtn != null) {
-            debugBtn.post(() -> {
+        if (showGuideNow) {
+            new Handler(Looper.getMainLooper()).post(() -> {
                 View ttNew   = findViewById(R.id.new_detections_container);
                 View ttTotal = findViewById(R.id.total_detections_container);
                 View ttView  = (findViewById(R.id.view_detections_container) != null)

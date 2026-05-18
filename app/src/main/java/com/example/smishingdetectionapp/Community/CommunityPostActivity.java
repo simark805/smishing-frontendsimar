@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +19,7 @@ import com.example.smishingdetectionapp.MainActivity;
 import com.example.smishingdetectionapp.NewsActivity;
 import com.example.smishingdetectionapp.R;
 import com.example.smishingdetectionapp.SettingsActivity;
+import com.example.smishingdetectionapp.navigation.BottomNavCoordinator;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
@@ -60,6 +63,7 @@ public class CommunityPostActivity extends AppCompatActivity {
         // Setup UI
         searchInput = findViewById(R.id.searchInput);
         ImageView filterBtn = findViewById(R.id.filterBtn);
+        TextView activeFilterLabel = findViewById(R.id.activeFilterLabel);
         filterBtn.setOnClickListener(v -> {
             String[] fields = {"All", "Username", "Date", "Title", "Description", "Likes", "Comments"};
             new androidx.appcompat.app.AlertDialog.Builder(this)
@@ -67,12 +71,21 @@ public class CommunityPostActivity extends AppCompatActivity {
                     .setItems(fields, (dialog, which) -> {
                         selectedField = fields[which].toLowerCase();
                         adapter.filter(searchInput.getText().toString(), selectedField);
+                        activeFilterLabel.setText(fields[which]);
+                        activeFilterLabel.setVisibility(View.VISIBLE);
                     })
                     .show();
         });
 
         ImageView clearSearch = findViewById(R.id.clearSearch);
-        clearSearch.setOnClickListener(v -> searchInput.setText(""));
+        clearSearch.setOnClickListener(v -> {
+            searchInput.setText("");
+            activeFilterLabel.setText("");
+            activeFilterLabel.setVisibility(View.GONE);
+            selectedField = "all";
+            adapter.filter("", "all");
+        });
+
 
         postsRecyclerView = findViewById(R.id.postsRecyclerView);
         postsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -124,27 +137,8 @@ public class CommunityPostActivity extends AppCompatActivity {
             finish();
         });
 
-        BottomNavigationView nav = findViewById(R.id.bottom_navigation);
-        nav.setSelectedItemId(R.id.nav_home); // Optional: set correct tab if needed
-        nav.setOnItemSelectedListener(item -> {
-            int id = item.getItemId();
-            if (id == R.id.nav_home) {
-                startActivity(new Intent(this, MainActivity.class));
-            } else if (id == R.id.nav_news) {
-                startActivity(new Intent(this, NewsActivity.class));
-            } else if (id == R.id.nav_settings) {
-                startActivity(new Intent(this, SettingsActivity.class));
-            } else if (id == R.id.nav_report) {
-                Intent intent = new Intent(this, CommunityReportActivity.class);
-                intent.putExtra("source", "posts");
-                startActivity(intent);
-            } else {
-                return false;
-            }
-            overridePendingTransition(0, 0);
-            finish();
-            return true;
-        });
+        BottomNavCoordinator.setup(this, R.id.nav_report, "posts");
+
     }
 
     @Override
