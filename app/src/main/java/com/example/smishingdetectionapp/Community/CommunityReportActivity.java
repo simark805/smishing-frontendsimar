@@ -101,6 +101,31 @@ public class CommunityReportActivity extends AppCompatActivity {
                     overridePendingTransition(0, 0);
                     finish();
                 }
+
+                // Strip spaces, dashes, brackets for validation
+                String digitsOnly = phone.replaceAll("[\\s\\-().+]", "");
+
+                // Australian number rules:
+                // Mobile: 04XXXXXXXX (10 digits starting with 04)
+                // Local landline: 0X XXXX XXXX (10 digits starting with 02/03/07/08)
+                // International format: 614XXXXXXXX (11 digits starting with 614)
+                boolean isAustralian = digitsOnly.matches("04\\d{8}") ||        // mobile
+                    digitsOnly.matches("0[2378]\\d{8}") ||   // landline
+                    digitsOnly.matches("614\\d{8}");          // intl mobile
+
+                if (!isAustralian) {
+                    Toast.makeText(this, "Please enter a valid Australian phone number up to 10 characters", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                CommunityDatabaseAccess dbAccess = new CommunityDatabaseAccess(this);
+                dbAccess.open();
+                dbAccess.insertOrUpdateReport(phone, msg);
+                dbAccess.close();
+
+                Toast.makeText(this, "Report submitted. Thank you!", Toast.LENGTH_LONG).show();
+                etPhone.setText("");
+                etMessage.setText("");
             });
         } else {
             Log.e("CommunityReportActivity", "Back button is null");
