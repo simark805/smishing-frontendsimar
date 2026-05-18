@@ -1,47 +1,16 @@
 package com.example.smishingdetectionapp;
 
-import android.app.Dialog;
-import android.view.View;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
+import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.RadioGroup;
-import android.widget.RadioButton;
-import android.widget.SeekBar;
-import android.widget.TextView;
 import android.widget.Toast;
-import android.content.res.Configuration;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.biometric.BiometricManager;
-import androidx.biometric.BiometricPrompt;
-import androidx.core.content.ContextCompat;
 
-import com.example.smishingdetectionapp.Community.CommunityHomeActivity;
-import com.example.smishingdetectionapp.Community.CommunityReportActivity;
 import com.example.smishingdetectionapp.chat.ChatAssistantActivity;
 import com.example.smishingdetectionapp.ui.account.AccountActivity;
-import com.example.smishingdetectionapp.ui.login.LoginActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.example.smishingdetectionapp.navigation.BottomNavCoordinator;
-import com.google.android.material.materialswitch.MaterialSwitch;
-
-import java.util.concurrent.Executor;
-
-import android.widget.ScrollView;
-import android.graphics.Typeface;
-import android.view.ViewGroup;
-
-import android.preference.PreferenceManager;
-import android.content.SharedPreferences;
-import android.widget.Switch;
-import com.example.smishingdetectionapp.ui.ContactUsActivity;
-import com.google.android.material.button.MaterialButton;
-
 
 
 public class SettingsActivity extends AppCompatActivity {
@@ -64,9 +33,6 @@ public class SettingsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean isBold = prefs.getBoolean("bold_text_enabled", false);
-        setTheme(isBold ? R.style.Theme_SmishingDetectionApp_Bold : R.style.Theme_SmishingDetectionApp);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
@@ -132,46 +98,6 @@ public class SettingsActivity extends AppCompatActivity {
             restoreScrollPosition();
         }
 
-        // Sort filter RadioButtons
-        RadioGroup sortOptionsGroup = findViewById(R.id.sortOptionsGroup);
-        RadioButton oldToNewRB = findViewById(R.id.OldToNewRB);
-        RadioButton newToOldRB = findViewById(R.id.NewToOldRB);
-
-        if (sortOptionsGroup != null && oldToNewRB != null && newToOldRB != null) {
-            // Restore saved selection
-            String savedSort = prefs.getString("sort_filter", "none");
-            if (savedSort.equals("old_to_new")) {
-                oldToNewRB.setChecked(true);
-            } else if (savedSort.equals("new_to_old")) {
-                newToOldRB.setChecked(true);
-            } else {
-                sortOptionsGroup.clearCheck();
-            }
-
-            // Toggle behaviour - tapping selected radio deselects it
-            oldToNewRB.setOnClickListener(v -> {
-                String current = prefs.getString("sort_filter", "none");
-                if (current.equals("old_to_new")) {
-                    sortOptionsGroup.clearCheck();
-                    prefs.edit().putString("sort_filter", "none").apply();
-                } else {
-                    oldToNewRB.setChecked(true);
-                    prefs.edit().putString("sort_filter", "old_to_new").apply();
-                }
-            });
-
-            newToOldRB.setOnClickListener(v -> {
-                String current = prefs.getString("sort_filter", "none");
-                if (current.equals("new_to_old")) {
-                    sortOptionsGroup.clearCheck();
-                    prefs.edit().putString("sort_filter", "none").apply();
-                } else {
-                    newToOldRB.setChecked(true);
-                    prefs.edit().putString("sort_filter", "new_to_old").apply();
-                }
-            });
-        }
-
         // Bold Text switch
         Switch boldSwitch = findViewById(R.id.bold_text);
         if (boldSwitch != null) {
@@ -197,14 +123,30 @@ public class SettingsActivity extends AppCompatActivity {
         BottomNavCoordinator.setup(this, R.id.nav_settings);
 
         // Account button to switch to account page with biometric authentication
-        Button accountBtn = findViewById(R.id.accountBtn);
-        accountBtn.setOnClickListener(v -> triggerBiometricAuthenticationWithTimeout());
+        BottomNavigationView nav = findViewById(R.id.bottom_navigation);
+        nav.setSelectedItemId(R.id.nav_settings);
 
-        // Password and Security button - requires biometric authentication
-        Button passwordBtn = findViewById(R.id.passwordBtn);
-        if (passwordBtn != null) {
-            passwordBtn.setOnClickListener(v -> triggerBiometricAuthenticationWithTimeout());
-        }
+        nav.setOnItemSelectedListener(menuItem -> {
+            int id = menuItem.getItemId();
+            if (id == R.id.nav_home) {
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                overridePendingTransition(0, 0);
+                finish();
+                return true;
+            } else if (id == R.id.nav_news) {
+                startActivity(new Intent(getApplicationContext(), NewsActivity.class));
+                overridePendingTransition(0, 0);
+                finish();
+                return true;
+            } else if (id == R.id.nav_settings) {
+                return true;
+            }
+            return false;
+        });
+
+        // Account button
+        Button accountBtn = findViewById(R.id.accountBtn);
+        accountBtn.setOnClickListener(v -> openAccountActivity());
 
         // Notification button to switch to notification page
         Button notificationBtn = findViewById(R.id.notificationBtn);
@@ -221,40 +163,44 @@ public class SettingsActivity extends AppCompatActivity {
         }
 
         // Report button to switch to reporting page
+        // Filtering button
+        Button filteringBtn = findViewById(R.id.filteringBtn);
+        filteringBtn.setOnClickListener(v -> {
+            startActivity(new Intent(this, SmishingRulesActivity.class));
+            finish();
+        });
+
+        // Report button
         Button reportBtn = findViewById(R.id.reportBtn);
         reportBtn.setOnClickListener(v -> {
-            startActivity(new Intent(this, CommunityReportActivity.class));
+            startActivity(new Intent(this, ReportingActivity.class));
+            finish();
         });
 
         // Help button to switch to Help page
+        // Help button
         Button helpBtn = findViewById(R.id.helpBtn);
         helpBtn.setOnClickListener(v -> {
             startActivity(new Intent(this, HelpActivity.class));
+            finish();
         });
 
-        // About Me button to switch to AboutMeActivity
+        // About Me button
         Button aboutMeButton = findViewById(R.id.aboutMeBtn);
         aboutMeButton.setOnClickListener(v -> {
-            Intent intent = new Intent(SettingsActivity.this, AboutMeActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(SettingsActivity.this, AboutMeActivity.class));
         });
 
+        // About Us button
         Button aboutUsBtn = findViewById(R.id.aboutUsBtn);
         aboutUsBtn.setOnClickListener(v -> {
-            Intent intent = new Intent(SettingsActivity.this, AboutUsActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(SettingsActivity.this, AboutUsActivity.class));
         });
 
-        MaterialButton contactUsButton = findViewById(R.id.contactUsBtn);
-        contactUsButton.setOnClickListener(view -> {
-            Intent intent = new Intent(SettingsActivity.this, ContactUsActivity.class);
-            startActivity(intent);
-        });
-
+        // Chat Assistant button
         Button chatAssistantBtn = findViewById(R.id.chatAssistantBtn);
         chatAssistantBtn.setOnClickListener(v -> {
-            Intent intent = new Intent(SettingsActivity.this, ChatAssistantActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(SettingsActivity.this, ChatAssistantActivity.class));
         });
 
         // Feedback Button to switch to Feedback page
@@ -444,18 +390,25 @@ public class SettingsActivity extends AppCompatActivity {
     public void onBackPressed() {
         BottomNavigationView nav = findViewById(R.id.bottom_navigation);
         nav.setSelectedItemId(R.id.nav_home);
-        finish();
-        super.onBackPressed();
+        // Feedback button
+        Button feedbackBtn = findViewById(R.id.feedbackBtn);
+        feedbackBtn.setOnClickListener(v -> {
+            startActivity(new Intent(this, FeedbackActivity.class));
+            finish();
+        });
+
+        // Forum button
+        Button forumBtn = findViewById(R.id.forumBtn);
+        forumBtn.setOnClickListener(v -> {
+            startActivity(new Intent(this, ForumActivity.class));
+            finish();
+        });
     }
 
-    private void saveScrollPosition() {
-        if (scrollView != null) {
-            int scrollY = scrollView.getScrollY();
-            PreferenceManager.getDefaultSharedPreferences(this)
-                    .edit()
-                    .putInt("scroll_pos", scrollY)
-                    .apply();
-        }
+    // Open AccountActivity directly
+    private void openAccountActivity() {
+        startActivity(new Intent(SettingsActivity.this, AccountActivity.class));
+        finish();
     }
 
     private void restoreScrollPosition() {
@@ -478,5 +431,10 @@ public class SettingsActivity extends AppCompatActivity {
         if (!prefs.getBoolean("cold_start", false)) {
             restoreScrollPosition();
         }
+    }
+}
+    // Notification button
+    public void openNotificationsActivity(View view) {
+        startActivity(new Intent(this, NotificationActivity.class));
     }
 }
