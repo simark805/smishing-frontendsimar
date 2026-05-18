@@ -39,7 +39,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RegisterMain extends AppCompatActivity {
 
     private static final int TERMS_REQUEST_CODE = 1001;
-
     private ActivitySignupBinding binding;
     private Retrofit retrofit;
     private Retrofitinterface retrofitinterface;
@@ -68,15 +67,25 @@ public class RegisterMain extends AppCompatActivity {
             finish();
         });
 
-        // FIXED: correct ID from your XML
-        TextView termsTextView = findViewById(R.id.terms_conditions);
+        // Link Terms and Conditions
+        TextView termsTextView = findViewById(R.id.terms_text);
+        termsCheckBox = findViewById(R.id.terms_condition_checkbox);
 
+        // Tapping the text opens Terms and Conditions page
         termsTextView.setOnClickListener(v -> {
             Intent intent = new Intent(RegisterMain.this, TermsAndConditionsActivity.class);
             startActivityForResult(intent, TERMS_REQUEST_CODE);
         });
 
-        Button registerButton = binding.registerBtn;
+        // Tapping the checkbox also opens Terms and Conditions page
+        termsCheckBox.setOnClickListener(v -> {
+            termsCheckBox.setChecked(false);
+            Intent intent = new Intent(RegisterMain.this, TermsAndConditionsActivity.class);
+            startActivityForResult(intent, TERMS_REQUEST_CODE);
+        });
+
+        // Set up register button
+        Button registerButton = findViewById(R.id.registerBtn);
         registerButton.setEnabled(false);
 
         registerButton.setOnClickListener(v -> {
@@ -111,20 +120,22 @@ public class RegisterMain extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        Button registerButton = binding.registerBtn;
-
-        if (requestCode == TERMS_REQUEST_CODE && resultCode == RESULT_OK) {
-            termsAccepted = true;
-            registerButton.setEnabled(true);
-        } else {
-            termsAccepted = false;
-            registerButton.setEnabled(false);
+        if (requestCode == TERMS_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                Button registerButton = findViewById(R.id.registerBtn);
+                registerButton.setEnabled(true);
+                termsCheckBox.setChecked(true);
+            } else {
+                termsCheckBox.setChecked(false);
+                findViewById(R.id.registerBtn).setEnabled(false);
+            }
         }
     }
 
-    // ---------------- UI MODE ----------------
-    private void setDarkMode() {
-        binding.getRoot().setBackgroundColor(ContextCompat.getColor(this, R.color.black));
+    private String generateVerificationCode() {
+        Random random = new Random();
+        int code = 100000 + random.nextInt(900000);
+        return String.valueOf(code);
     }
 
     private void setLightMode() {
@@ -204,7 +215,6 @@ public class RegisterMain extends AppCompatActivity {
         });
     }
 
-    // ---------------- EMAIL VALIDATION ----------------
     private boolean isValidEmailAddress(String email) {
         try {
             InternetAddress emailAddr = new InternetAddress(email);
@@ -216,9 +226,5 @@ public class RegisterMain extends AppCompatActivity {
         } catch (AddressException e) {
             return false;
         }
-    }
-
-    private String generateVerificationCode() {
-        return String.valueOf(100000 + new Random().nextInt(900000));
     }
 }

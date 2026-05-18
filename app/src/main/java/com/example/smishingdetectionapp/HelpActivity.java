@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ImageButton;
-import android.widget.Toast;
+
 
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -29,60 +29,72 @@ public class HelpActivity extends SharedActivity {
             return insets;
         });
 
-        // Back button
-        ImageButton backBtn = findViewById(R.id.help_back);
-        if (backBtn != null) {
-            backBtn.setOnClickListener(v -> finish());
-        }
 
-        // Call Us
-        MaterialCardView callUs = findViewById(R.id.cardCallUs);
-        if (callUs != null) {
-            callUs.setOnClickListener(v -> {
-                Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:+1234567890"));
-                startActivity(intent);
+        // Back button: finish activity
+        ImageButton helpBack = findViewById(R.id.help_back);
+        helpBack.setOnClickListener(v -> {
+            startActivity(new Intent(this, SettingsActivity.class));
+            finish();
+        });
+
+        // Menu button: handle as needed
+        ImageButton helpMenu = findViewById(R.id.help_menu);
+        helpMenu.setOnClickListener(v -> {
+            // Implement menu actions if necessary
+        });
+
+
+        // Common Topics Click Listeners
+        MaterialCardView cardTopic1 = findViewById(R.id.cardTopic1);
+        cardTopic1.setOnClickListener(v -> {
+            Intent intent = new Intent(this, TopicDetailActivity.class);
+            intent.putExtra("TOPIC_ID", "DETECT_SMISHING");
+            startActivity(intent);
+        });
+
+        MaterialCardView cardTopic2 = findViewById(R.id.cardTopic2);
+        cardTopic2.setOnClickListener(v -> {
+            Intent intent = new Intent(this, TopicDetailActivity.class);
+            intent.putExtra("TOPIC_ID", "REPORT_SMS");
+            startActivity(intent);
+        });
+
+        MaterialCardView cardTopic3 = findViewById(R.id.cardTopic3);
+        cardTopic3.setOnClickListener(v -> {
+            Intent intent = new Intent(this, TopicDetailActivity.class);
+            intent.putExtra("TOPIC_ID", "SMISHING_VS_PHISHING");
+            startActivity(intent);
+        });
+
+
+        // ---------- FAQ entry (single id across layouts) ----------
+        MaterialCardView cardFAQ = findViewById(R.id.cardFAQ);   // <-- ensure your layout uses this id
+        if (cardFAQ != null) cardFAQ.setOnClickListener(v -> openFaq(null));
+
+
+        // Contact Options Click Listeners
+        MaterialCardView cardCallUs = findViewById(R.id.cardCallUs);
+        if (cardCallUs != null) {
+            cardCallUs.setOnClickListener(v -> {
+                Intent phoneIntent = new Intent(Intent.ACTION_DIAL);
+                phoneIntent.setData(Uri.parse("tel:+1234567890")); // Replace with your phone number
+                startActivity(phoneIntent);
             });
         }
-
-        // Mail Us
-        MaterialCardView mailUs = findViewById(R.id.cardMailUs);
-        if (mailUs != null) {
-            mailUs.setOnClickListener(v -> {
-                Intent intent = new Intent(Intent.ACTION_SENDTO);
-                intent.setData(Uri.parse("mailto:support@example.com"));
-                startActivity(intent);
+        MaterialCardView cardMailUs = findViewById(R.id.cardMailUs);
+        if (cardMailUs != null) {
+            cardMailUs.setOnClickListener(v -> {
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+                emailIntent.setData(Uri.parse("mailto:support@example.com")); // Replace with your email address
+                startActivity(emailIntent);
             });
         }
-
-        // FAQ
-        MaterialCardView faq = findViewById(R.id.cardFAQ);
-        if (faq != null) {
-            faq.setOnClickListener(v -> {
-                startActivity(new Intent(this, FaqActivity.class));
-            });
-        }
-
-        // Feedback
-        MaterialCardView feedback = findViewById(R.id.cardFeedback);
-        if (feedback != null) {
-            feedback.setOnClickListener(v -> {
-                startActivity(new Intent(this, FeedbackActivity.class));
-            });
-        }
-
-        // Optional topic cards (safe if present)
-        setupOptionalCard(R.id.cardTopic1, "How to detect a smishing message");
-        setupOptionalCard(R.id.cardTopic2, "How to report a suspicious SMS");
-        setupOptionalCard(R.id.cardTopic3, "What is smishing vs phishing?");
-    }
-
-    private void setupOptionalCard(int id, String message) {
-        MaterialCardView card = findViewById(id);
-        if (card != null) {
-            card.setOnClickListener(v ->
-                    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        MaterialCardView cardFeedback = findViewById(R.id.cardFeedback);
+        if (cardFeedback != null) {
+            cardFeedback.setOnClickListener(v ->
+                    startActivity(new Intent(HelpActivity.this, FeedbackActivity.class))
             );
+
         }
     }
 }
