@@ -56,12 +56,6 @@ public class MainActivity extends SharedActivity {
 
         BottomNavCoordinator.setup(this, R.id.nav_home);
 
-        Button debugBtn = findViewById(R.id.debug_btn);
-        if (debugBtn != null) {
-            debugBtn.setOnClickListener(v ->
-                    startActivity(new Intent(MainActivity.this, DebugActivity.class))
-            );
-        }
 
         // ===== CLICK TARGETS FOR "VIEW DETECTIONS" AND "RISK SCANNER" =====
         // Prefer the new card containers if present; otherwise fall back to legacy buttons.
@@ -123,8 +117,8 @@ public class MainActivity extends SharedActivity {
 
         // TapTarget guide
         boolean showGuideNow = getIntent().getBooleanExtra("showGuide", false);
-        if (showGuideNow && debugBtn != null) {
-            debugBtn.post(() -> {
+        if (showGuideNow) {
+            new Handler(Looper.getMainLooper()).post(() -> {
                 View ttNew   = findViewById(R.id.new_detections_container);
                 View ttTotal = findViewById(R.id.total_detections_container);
                 View ttView  = (findViewById(R.id.view_detections_container) != null)
