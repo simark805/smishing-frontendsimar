@@ -113,21 +113,21 @@ public class SignupActivity extends AppCompatActivity {
             String pin = pinInput.getText().toString();
 
             if (!password.equals(confirmPassword)) {
-                Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Passwords do not match, Please try again.", Toast.LENGTH_SHORT).show();
                 return;
             }
             if (phoneNumber.length() != 10 || !phoneNumber.matches("\\d+")) {
-                Toast.makeText(this, "Invalid phone number. Must be 10 digits.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Please enter a valid 10 digit phone number.", Toast.LENGTH_SHORT).show();
                 return;
             }
             if (pin.length() != 6 || !pin.matches("\\d+")) {
-                Toast.makeText(this, "Invalid PIN. Must be 6 digits.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Pin must contain 6 digits.", Toast.LENGTH_SHORT).show();
                 return;
             }
             try {
                 boolean isInserted = databaseAccess.insertLogin(name, email, phoneNumber, password, pin);
                 if (isInserted) {
-                    Toast.makeText(this, "Registration successful!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Registration completed successful!", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(SignupActivity.this, LoginActivity.class));
                     finish();
                 } else {
